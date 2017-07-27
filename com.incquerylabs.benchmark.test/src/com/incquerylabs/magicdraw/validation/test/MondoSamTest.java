@@ -91,7 +91,7 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 	}
 
 	private void localSearchIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(APerformanceQueries.instance().getSpecifications())) {
+		for (IQuerySpecification<?> querySpecification : sort(getLSQuerySpecifications())) {
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
 
@@ -106,7 +106,7 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 	}
 
 	private void reteIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(APerformanceQueries.instance().getSpecifications())) {
+		for (IQuerySpecification<?> querySpecification : sort(getReteQuerySpecifications())) {
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
 
@@ -121,7 +121,7 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 	}
 
 	private void hybridIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(IncrementalQueries.instance().getSpecifications())) {
+		for (IQuerySpecification<?> querySpecification : sort(getHybridQuerySpecifications())) {
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
 
@@ -190,12 +190,22 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
 	}
 
+	protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() {
+	    return APerformanceQueries.instance().getSpecifications();
+	}
+	
+	protected Collection<IQuerySpecification<?>> getLSQuerySpecifications() {
+        return APerformanceQueries.instance().getSpecifications();
+    }
+	
+	protected Collection<IQuerySpecification<?>> getHybridQuerySpecifications() {
+        return IncrementalQueries.instance().getSpecifications();
+    }
+	
 	private List<IQuerySpecification<?>> sort(Collection<IQuerySpecification<?>> querySpecifications) throws ViatraQueryException {
-		final ImmutableSet<String> queries = ImmutableSet.<String>builder()
-				.add(getName(APerformanceQueries.instance().getTransitiveSubstatesWithCheck3()))
-				.build();
+		
 		return querySpecifications.stream().sorted((a, b) -> a.getFullyQualifiedName().compareTo(b.getFullyQualifiedName()))
-				.filter(spec -> queries.contains(getName(spec))).collect(Collectors.toList());
+				.collect(Collectors.toList());
 	}
 
 	/**
