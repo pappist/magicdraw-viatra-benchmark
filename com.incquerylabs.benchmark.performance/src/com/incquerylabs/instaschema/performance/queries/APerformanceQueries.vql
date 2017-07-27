@@ -294,6 +294,10 @@ pattern numberOfTransitiveSubstates(state : State, transitiveSubstateCount : jav
  * Reusing a transitive closure and count aggregator pattern with the max aggregator.
  */
 pattern stateWithMostSubstates(state : State) {
-	_count == max find numberOfTransitiveSubstates(state, #substateCount);
-}  
-  // Ideas: functional dependencies
+    // the number of substates of this state
+    find numberOfTransitiveSubstates(state, count);
+    // is the maximum from all states
+	count == max find numberOfTransitiveSubstates(_, #substateCount);
+}
+
+// Ideas: functional dependencies
