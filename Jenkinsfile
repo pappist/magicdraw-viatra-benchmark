@@ -38,5 +38,26 @@ pipeline {
     		archiveArtifacts 'com.incquerylabs.instaschema.test/results/**, benchmark/**'
     		junit '**/TEST-*.xml'
     	}
+        success {
+            slackSend channel: "magicdraw-notificatio", 
+    			color: "good",
+				message: "Build Successful - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
+    			teamDomain: "incquerylabs",
+    			tokenCredentialId: "6ff98023-8c20-4d9c-821a-b769b0ea0fad" 
+        }
+		unstable {
+	   		slackSend channel: "magicdraw-notificatio", 
+    			color: "warning",
+    			message: "Build Unstable - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
+    			teamDomain: "incquerylabs",
+    			tokenCredentialId: "6ff98023-8c20-4d9c-821a-b769b0ea0fad"
+    	}
+		failure {
+    		slackSend channel: "magicdraw-notificatio", 
+    			color: "danger",
+    			message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
+    			teamDomain: "incquerylabs",
+    			tokenCredentialId: "6ff98023-8c20-4d9c-821a-b769b0ea0fad"
+		}
 	}
 }
