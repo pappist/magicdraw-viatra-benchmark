@@ -12,7 +12,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.collect.ImmutableSet;
 import com.incquerylabs.instaschema.mondo.sam.MultipleQueriesScenario;
 import com.incquerylabs.instaschema.mondo.sam.MyDataToken;
 import com.incquerylabs.instaschema.performance.EngineImpl;
@@ -190,15 +189,15 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
 	}
 
-	protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() {
+	protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() throws ViatraQueryException {
 	    return APerformanceQueries.instance().getSpecifications();
 	}
 	
-	protected Collection<IQuerySpecification<?>> getLSQuerySpecifications() {
+	protected Collection<IQuerySpecification<?>> getLSQuerySpecifications() throws ViatraQueryException {
         return APerformanceQueries.instance().getSpecifications();
     }
 	
-	protected Collection<IQuerySpecification<?>> getHybridQuerySpecifications() {
+	protected Collection<IQuerySpecification<?>> getHybridQuerySpecifications() throws ViatraQueryException {
         return IncrementalQueries.instance().getSpecifications();
     }
 	
