@@ -17,20 +17,6 @@ pattern nonBlockClasses(class : Class) {
 }
 
 /**
- * Querying all instances of an EClass with an attribute. 
- */
-pattern visibilityOfClasses(class : Class, visibility) {
-	Class.visibility(class, visibility);
-}
-
-/**
- * Querying all instances of an EClass with a singular reference. 
- */
-pattern nameExpressionsOfClasses(class : Class, nameExpression : StringExpression) {
-	Class.nameExpression(class, nameExpression);
-}
-
-/**
  * Querying all instances of an EClass that have a short "reference chain".
  */
 pattern blocks(class : Class) {
@@ -47,7 +33,7 @@ pattern requirements(class : Class) {
 /**
  * Querying all instances of an EClass that have a short "reference chain".
  */
-pattern constraintBlocks(class : Class) {
+private pattern constraintBlocks(class : Class) {
 	Class.appliedStereotypeInstance.classifier.name(class, "Constraint"); 
 }
 
@@ -160,33 +146,50 @@ pattern elementsWithShortNames(class : NamedElement) {
 //}
 
 /**
- * More complicated pattern with some references and attributes all used as parameters.
+ * A transition that connects two states with the following properties
+ * - Source state is a member of a composite state
+ * - Target state is a member of the same state machine, however not contained in a composite state
+ * - Target state has an outgoing transition towards a final state
+ * 
  */
-pattern complicatedClasses(class : Class, superClass : Class, name : java ^java.lang.String, visibility, supplierClass : Class, owningPackage : Package, importedPackage : Package) {
-	Class.name(superClass, name);
-	Generalization.general(generalization, superClass);
-	Class.generalization(class, generalization);
-	Class.visibility(class, visibility);
-	find dependencies(class, supplierClass);
-	Class.owningPackage(supplierClass, owningPackage);
-	Package.packageImport(owningPackage, packageImport);
-	PackageImport.importedPackage(packageImport, importedPackage);
+pattern transitionPointingOutOfCompState(source : State, target : Vertex, transition : Transition) {
+	Transition.source(transition, source);
+	Transition.target(transition, target);
+	
+	//pattern for target side element
+	Vertex.container(target, targetRegion);
+	Region.stateMachine(targetRegion, _);
+	Vertex.outgoing(target, targetVertexTransition);
+	Transition.target(targetVertexTransition, finalState);
+	FinalState(finalState);
+	
+	//Pattern for source side element
+	find parentState+(source, sourceParent);
+	State.container.stateMachine(sourceParent, _ );
+	
 }
 
+
 /**
- * More complicated pattern with some references and attributes all used as parameters.
+ * A loop transition that
+ * - Has a trigger
+ * - Has some effect that is an activity
+ * - Has no guard
+ * - defines an event
+ * 
  */
-pattern complicatedStates(stateMachine : StateMachine, topRegion : Region, topRegionName : java ^java.lang.String, state : State, transition : Transition, targetState : Vertex, trigger : Trigger, event : Event, owningPackage : Package) {
-	StateMachine.region(stateMachine, topRegion);
-	Region.name(topRegion, topRegionName);
-	Region.state(topRegion, state);
+pattern loopTransitionWithTriggerEffectEventNoGuard(state : State, transition : Transition, trigger : Trigger, event : Event, effect : Activity) {
 	Transition.source(transition, state);
-	Transition.target(transition, targetState);
+	Transition.target(transition, state);
 	Transition.kind(transition, ::external);
-	Transition.guard(transition, _);
 	Transition.trigger(transition, trigger);
+	Transition.effect(transition, effect);
+	neg find transitionWithGuard(transition, _);
 	Trigger.event(trigger, event);
-	Event.owningPackage(event, owningPackage);
+}
+
+private pattern transitionWithGuard(trans : Transition, guard : Constraint){
+	Transition.guard(trans, guard);
 }
 
 /**
@@ -258,18 +261,17 @@ pattern transitiveSubstatesWithCheck(state : State, transitiveSubstate : State) 
 /**
  * Reusing a simple pattern with a check expression. Made for reuse.
  */
-pattern statesWithMoreThan3IncomingTransitions(state : State)  {
+pattern statesWithMoreIncomingTransitions(state : State)  {
 	transitionCount == count find incomingTransitions(_, state);
-	check (transitionCount > 3);
+	check (transitionCount > 1);
 }
 
 /**
  * Reusing a simple pattern with a check expression before the transitive closure.
  */
 pattern transitiveSubstatesWithCheck2(state : State, transitiveSubstate : State) {
-	find statesWithShortNames(state);
 	transitionCount == count find incomingTransitions(_, state);
-	check (transitionCount > 3);
+	check (transitionCount > 1);
 	find parentState+(transitiveSubstate, state);
 }
 
@@ -277,8 +279,7 @@ pattern transitiveSubstatesWithCheck2(state : State, transitiveSubstate : State)
  * Reusing a simple pattern with a check expression before the transitive closure.
  */
 pattern transitiveSubstatesWithCheck3(state : State, transitiveSubstate : State) {
-	find statesWithShortNames(state);
-	find statesWithMoreThan3IncomingTransitions(state);
+	find statesWithMoreIncomingTransitions(state);
 	find parentState+(transitiveSubstate, state);
 }
 

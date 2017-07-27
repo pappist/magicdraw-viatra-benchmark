@@ -3,7 +3,7 @@ package com.incquerylabs.instaschema.performance.incrementalqueries
 import "http://www.nomagic.com/magicdraw/UML/2.5.0"
 import com.incquerylabs.instaschema.performance.queries.statesWithShortNames
 import com.incquerylabs.instaschema.performance.queries.incomingTransitions
-import com.incquerylabs.instaschema.performance.queries.statesWithMoreThan3IncomingTransitions
+import com.incquerylabs.instaschema.performance.queries.statesWithMoreIncomingTransitions
 
 /**
  * Simple pattern for transitive closures marked incremental.
@@ -25,9 +25,8 @@ pattern transitiveSubstatesWithCheck(state : State, transitiveSubstate : State) 
  * Reusing a simple pattern with a check expression before the transitive closure which is an incremental pattern.
  */
 pattern transitiveSubstatesWithCheck2(state : State, transitiveSubstate : State) {
-	find statesWithShortNames(state);
 	transitionCount == count find incomingTransitions(_, state);
-	check (transitionCount > 3);
+	check (transitionCount > 1);
 	find parentState+(transitiveSubstate, state);
 }
 
@@ -35,7 +34,6 @@ pattern transitiveSubstatesWithCheck2(state : State, transitiveSubstate : State)
  * Reusing a simple pattern with a check expression before the transitive closure which is an incremental pattern.
  */
 pattern transitiveSubstatesWithCheck3(state : State, transitiveSubstate : State) {
-	find statesWithShortNames(state);
-	find statesWithMoreThan3IncomingTransitions(state);
+	find statesWithMoreIncomingTransitions(state);
 	find parentState+(transitiveSubstate, state);
 }

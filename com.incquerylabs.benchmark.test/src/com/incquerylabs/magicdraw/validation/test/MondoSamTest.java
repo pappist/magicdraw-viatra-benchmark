@@ -12,13 +12,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.google.common.collect.ImmutableSet;
 import com.incquerylabs.instaschema.mondo.sam.MultipleQueriesScenario;
 import com.incquerylabs.instaschema.mondo.sam.MyDataToken;
 import com.incquerylabs.instaschema.performance.EngineImpl;
 import com.incquerylabs.instaschema.performance.incrementalqueries.IncrementalQueries;
 import com.incquerylabs.instaschema.performance.queries.APerformanceQueries;
-import com.incquerylabs.instaschema.performance.queries.util.ComplicatedClassesQuerySpecification;
 import com.incquerylabs.instaschema.performance.queries.util.IncomingTransitionsQuerySpecification;
 import com.incquerylabs.instaschema.performance.queries.util.ParentStateQuerySpecification;
 import com.incquerylabs.instaschema.performance.queries.util.TransitiveSubstatesWithCheck3QuerySpecification;
@@ -40,7 +38,7 @@ public class MondoSamTest {
 
 
 	private static final String MODEL = "TMT";
-private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 780000, 1040000, 1200000*/}; 
+private static final Integer[] MODELSIZES = new Integer[]{300000, 540000, 780000, 1040000, 1200000}; 
 	private static final String WARMUP_MODEL = "Warmup";
 
 	// The input models must be stored in these folders
@@ -192,11 +190,8 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 	}
 
 	private List<IQuerySpecification<?>> sort(Collection<IQuerySpecification<?>> querySpecifications) throws ViatraQueryException {
-		final ImmutableSet<String> queries = ImmutableSet.<String>builder()
-				.add(getName(APerformanceQueries.instance().getTransitiveSubstatesWithCheck3()))
-				.build();
 		return querySpecifications.stream().sorted((a, b) -> a.getFullyQualifiedName().compareTo(b.getFullyQualifiedName()))
-				.filter(spec -> queries.contains(getName(spec))).collect(Collectors.toList());
+				.collect(Collectors.toList());
 	}
 
 	/**
