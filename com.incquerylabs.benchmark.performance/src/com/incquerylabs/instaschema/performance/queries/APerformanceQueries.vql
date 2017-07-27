@@ -1,0 +1,298 @@
+package com.incquerylabs.instaschema.performance.queries
+
+import "http://www.nomagic.com/magicdraw/UML/2.5.0"
+
+/**
+ * Querying all instances of an EClass. 
+ */
+pattern classes(class : Class) {
+	Class(class);
+}
+
+/**
+ * Querying elements that are not the specified type: single negation.
+ */
+pattern nonBlockClasses(class : Class) {
+	neg find blocks(class);
+}
+
+/**
+ * Querying all instances of an EClass with an attribute. 
+ */
+pattern visibilityOfClasses(class : Class, visibility) {
+	Class.visibility(class, visibility);
+}
+
+/**
+ * Querying all instances of an EClass with a singular reference. 
+ */
+pattern nameExpressionsOfClasses(class : Class, nameExpression : StringExpression) {
+	Class.nameExpression(class, nameExpression);
+}
+
+/**
+ * Querying all instances of an EClass that have a short "reference chain".
+ */
+pattern blocks(class : Class) {
+    Class.appliedStereotypeInstance.classifier.name(class, "Block"); 
+}
+
+/**
+ * Querying all instances of an EClass that have a short "reference chain".
+ */
+pattern requirements(class : Class) {
+	Class.appliedStereotypeInstance.classifier.name(class, "Requirement"); 
+}
+
+/**
+ * Querying all instances of an EClass that have a short "reference chain".
+ */
+pattern constraintBlocks(class : Class) {
+	Class.appliedStereotypeInstance.classifier.name(class, "Constraint"); 
+}
+
+/**
+ * Disjunction of blocks and requirements.
+ */
+pattern blocksOrRequirements(class : Class) {
+	find blocks(class);
+} or {
+	find requirements(class);
+}
+
+/**
+ * Disjunction reusing the blocksOrRequirements and constraintBlocks patterns and the negation of dependencies.
+ */
+pattern blocksOrRequirementsOrConstraints(class : Class) {
+	find blocksOrRequirements(class);
+} or {
+	find constraintBlocks(class);
+	neg find dependencies(class, _);
+	neg find dependencies(_, class);
+}
+
+/**
+ * Querying all instances of an EClass with an attribute. 
+ */
+pattern namedElement(element : NamedElement, name : java ^java.lang.String) {
+	NamedElement.name(element, name);
+}
+
+/**
+ * Reusing namedElement and eval the names.
+ */
+pattern complexNameOfElements(element : NamedElement, complexName : java ^java.lang.String) {
+	find namedElement(element, name);
+	complexName == eval(name.toFirstUpper + ". "+ name.toFirstLower + "." + name.toUpperCase + "." + name.toLowerCase + "." + name.length); 
+}
+
+
+/**
+ * Pattern describing succession relation between two dependencies.
+ */
+pattern dependencyChains(source : Dependency, target : Dependency) {
+    Dependency.supplier(source, elem);
+    Dependency.client(target, elem);
+}
+
+/*
+ * Pattern responsible for detecting circular dependency chains.
+ */
+pattern circularDependencies(dependency : Dependency) {
+    find dependencyChains+(dependency, dependency);
+}
+
+/**
+ * Source and target of a dependency element.
+ */
+pattern dependencies(source : NamedElement, target : NamedElement) {
+	Dependency.supplier(dependency, target);
+	Dependency.client(dependency, source);
+}
+
+/**
+ * Reusing the dependency pattern and querying simple attributes.
+ */
+pattern namesOfDependencyEndpoints(source : NamedElement, sourceName : java ^java.lang.String, target : NamedElement, targetName : java ^java.lang.String) {
+	find dependencies(source, target);
+	NamedElement.name(source, sourceName);
+	NamedElement.name(target, targetName);
+}
+
+/**
+ * Reusing the namesOfDependencyEndpoints pattern and filtering with a check.
+ */
+pattern alphabeticalDependencies(source : NamedElement, target : NamedElement) {
+	find namesOfDependencyEndpoints(source, sourceName, target, targetName);
+	check (sourceName < targetName);
+}
+
+/**
+ * Simple filtering with a check on all instances of an EClass.
+ */
+pattern elementsWithShortNames(class : NamedElement) {
+	NamedElement.name(class, name);
+	check (name.length < 10); 
+}
+
+/**
+ * Cartesian product of classes.
+ */
+//pattern productOfClasses(lhs : Class, lhsName : java ^java.lang.String, rhs : Class, rhsName : java ^java.lang.String) {
+//	Class.name(lhs, lhsName);
+//    Class.name(rhs, rhsName);
+//}
+
+/**
+ * Cartesian product of classes and a filter using a check.
+ */
+//private pattern hasLongerName(lhs : Class, rhs : Class) {
+//    find productOfClasses(lhs, lhsName, rhs, rhsName);
+//    check (lhsName.length < rhsName.length); 
+//}
+
+/**
+ * Selecting an element reusing a Cartesian product.
+ */
+//pattern elementWithShortestName(element : Class) {
+//	find requirements(element); // If this in not here, we run out of memory
+//	neg find hasLongerName(_, element);
+//}
+
+/**
+ * More complicated pattern with some references and attributes all used as parameters.
+ */
+pattern complicatedClasses(class : Class, superClass : Class, name : java ^java.lang.String, visibility, supplierClass : Class, owningPackage : Package, importedPackage : Package) {
+	Class.name(superClass, name);
+	Generalization.general(generalization, superClass);
+	Class.generalization(class, generalization);
+	Class.visibility(class, visibility);
+	find dependencies(class, supplierClass);
+	Class.owningPackage(supplierClass, owningPackage);
+	Package.packageImport(owningPackage, packageImport);
+	PackageImport.importedPackage(packageImport, importedPackage);
+}
+
+/**
+ * More complicated pattern with some references and attributes all used as parameters.
+ */
+pattern complicatedStates(stateMachine : StateMachine, topRegion : Region, topRegionName : java ^java.lang.String, state : State, transition : Transition, targetState : Vertex, trigger : Trigger, event : Event, owningPackage : Package) {
+	StateMachine.region(stateMachine, topRegion);
+	Region.name(topRegion, topRegionName);
+	Region.state(topRegion, state);
+	Transition.source(transition, state);
+	Transition.target(transition, targetState);
+	Transition.kind(transition, ::external);
+	Transition.guard(transition, _);
+	Transition.trigger(transition, trigger);
+	Trigger.event(trigger, event);
+	Event.owningPackage(event, owningPackage);
+}
+
+/**
+ * Simple pattern for transitive closures.
+ */
+pattern parentState(state : State, parentState : State) {
+	State.region(parentState, subregion);
+	Region.subvertex(subregion, state);
+} 
+
+/**
+ * Using recursion, eval and disjunction.
+ * Cannot be evaluated using local search because of recursion!
+ */
+//pattern qualifiedStateName(state : State, name : java ^java.lang.String) {
+//	find parentState(state, parentState);
+//    State.name(state, simpleName);
+//    find qualifiedStateName(parentState, parentName);
+//    name == eval (parentName + "." + simpleName);
+//} or { 
+//    neg find parentState(state, _);
+//    State.name(state, name);
+//}
+
+/**
+ * Simple pattern for aggregators.
+ */
+pattern subregions(state : State, subregion : Region) {
+  	State.region(state, subregion);
+}
+ 
+/**
+ * Reusing a simple pattern with the "count" aggregator.
+ */
+pattern numberOfSubregions(state : State, regionCount : java ^java.lang.Integer) {
+  	regionCount == count find subregions(state, _subregion);
+}
+
+/**
+ * Reusing a simple pattern with transitive closure.
+ */
+//pattern transitiveSubstates(state : State, transitiveSubstate : State) {	
+//	find parentState+(transitiveSubstate, state);
+//}
+
+/**
+ * Returns states with short names.
+ */
+pattern statesWithShortNames(state : State) {
+	State.name(state, name);
+	check(name.length < 6);
+}
+
+/**
+ * Returns transitions with their targets. Made for reuse.
+ */
+pattern incomingTransitions(transition : Transition, targetState : State) {
+	Transition.target(transition, targetState);
+}
+
+/**
+ * Reusing a simple pattern with a check expression before the transitive closure.
+ */
+pattern transitiveSubstatesWithCheck(state : State, transitiveSubstate : State) {
+	find statesWithShortNames(state);
+	find parentState+(transitiveSubstate, state);
+}
+
+/**
+ * Reusing a simple pattern with a check expression. Made for reuse.
+ */
+pattern statesWithMoreThan3IncomingTransitions(state : State)  {
+	transitionCount == count find incomingTransitions(_, state);
+	check (transitionCount > 3);
+}
+
+/**
+ * Reusing a simple pattern with a check expression before the transitive closure.
+ */
+pattern transitiveSubstatesWithCheck2(state : State, transitiveSubstate : State) {
+	find statesWithShortNames(state);
+	transitionCount == count find incomingTransitions(_, state);
+	check (transitionCount > 3);
+	find parentState+(transitiveSubstate, state);
+}
+
+/**
+ * Reusing a simple pattern with a check expression before the transitive closure.
+ */
+pattern transitiveSubstatesWithCheck3(state : State, transitiveSubstate : State) {
+	find statesWithShortNames(state);
+	find statesWithMoreThan3IncomingTransitions(state);
+	find parentState+(transitiveSubstate, state);
+}
+
+/**
+ * Reusing a transitive closure pattern with the count aggregator.
+ */
+pattern numberOfTransitiveSubstates(state : State, transitiveSubstateCount : java ^java.lang.Integer) {
+	transitiveSubstateCount == count find transitiveSubstatesWithCheck(state, _);
+}
+
+/**
+ * Reusing a transitive closure and count aggregator pattern with the max aggregator.
+ */
+pattern stateWithMostSubstates(state : State) {
+	_count == max find numberOfTransitiveSubstates(state, #substateCount);
+}  
+  // Ideas: functional dependencies

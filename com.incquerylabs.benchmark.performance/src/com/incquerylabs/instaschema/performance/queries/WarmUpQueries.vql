@@ -1,0 +1,23 @@
+package com.incquerylabs.instaschema.performance.queries
+
+import "http://www.nomagic.com/magicdraw/UML/2.5.0"
+
+// All these patterns are used to warm up the JVM before the real performance queries.
+
+pattern variables(variable : Variable, type : Type ) {
+	Variable.type(variable, type);
+}
+
+pattern associationClasses(associationClass : AssociationClass, useCase : UseCase) {
+	AssociationClass.ownedUseCase(associationClass, useCase);
+}
+
+pattern activitites(activity : Activity, event : Event, eventName : java ^java.lang.String, trigger : Trigger) {
+	Activity.event(activity, event);
+	Event.name(event, eventName);
+	Event._triggerOfEvent(event, trigger);
+}
+
+pattern actorGeneralization(actor : Actor, generalActor : GeneralizationSet) {
+	Actor.generalization.generalizationSet(actor, generalActor);
+}

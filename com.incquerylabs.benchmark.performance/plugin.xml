@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin 
+	class="com.incquerylabs.instaschema.performance.InstaSchemaPerformancePlugin" 
+	class-lookup="GlobalFirst" 
+	id="com.incquerylabs.instaschema" 
+	name="InstaSchemaPerformance" 
+	provider-name="IncQuery Labs ltd." 
+	version="1.0"
+	internalVersion="100010">
+
+  <runtime>
+    <library name="lib/guava.jar"/>
+    <library name="lib/log4j.jar"/>
+    <library name="lib/org.eclipse.xtend.lib.jar"/>
+    <library name="lib/org.eclipse.xtend.lib.macro.jar"/>
+    <library name="lib/org.eclipse.xtext.xbase.lib.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.base.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.base.itc.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.rete.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.rete.recipes.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.matchers.jar"/>
+    <library name="lib/org.eclipse.viatra.query.runtime.localsearch.jar"/>
+    <library name="lib/org.eclipse.viatra.transformation.evm.jar"/>
+    <library name="lib/org.eclipse.viatra.transformation.runtime.emf.jar"/>
+    <library name="lib/jackson-core-asl.jar"/>
+    <library name="lib/jackson-mapper-asl.jar"/>
+    <library name="lib/eu.mondo.sam.core-0.1.0.jar"/>
+    <library name="instaschema.performance.jar"/>
+  </runtime>
+</plugin>

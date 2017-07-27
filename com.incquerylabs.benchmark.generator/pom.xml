@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.incquerylabs.magicdraw</groupId>
+		<artifactId>benchmark.parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>com.incquerylabs.benchmark.generator</artifactId>
+	<description>Code generator helper for VIATRA Query Benchmark</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>${emf.version}</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.magicdraw.application</groupId>
+			<artifactId>com.nomagic.ci.binary_17.0.5</artifactId>
+			<version>17.0.5</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.binary_17.0.5.v20161006-1841.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.magicdraw.application</groupId>
+			<artifactId>com.nomagic.ci.services_17.0.5</artifactId>
+			<version>17.0.5</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.services_17.0.5.v20161006-1841.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.nomagic</groupId>
+			<artifactId>magicdraw.uml2</artifactId>
+			<version>2.5.0</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201610061849.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.nomagic</groupId>
+			<artifactId>magicdraw.diagram</artifactId>
+			<version>18.1.0</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core.diagram_18.1.0.201610061849.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.nomagic</groupId>
+			<artifactId>magicdraw.foundation</artifactId>
+			<version>2.0.0</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.foundation_2.0.0.201610061849.jar</systemPath>
+		</dependency>
+		
+				<dependency>
+			<groupId>javax</groupId>
+			<artifactId>jmi</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${md.home}/lib/bundles/javax.jmi_1.0.0.201610061849/javax_jmi-1_0-fr.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>
