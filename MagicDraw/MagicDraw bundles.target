@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="MagicDraw bundles" sequenceNumber="25">
+<locations>
+<location id="com.nomagic.magicdraw.platform.feature" path="${workspace_loc:/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles}" type="Feature"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.xbase.lib.feature.group" version="2.9.2.v201603040440"/>
+<unit id="org.eclipse.xtend.lib" version="2.9.2.v201603040440"/>
+<unit id="org.eclipse.xtend.lib.macro" version="2.9.2.v201603040440"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.2/"/>
+</location>
+<location path="${workspace_loc:/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles}" type="Directory"/>
+<location id="com.nomagic.magicdraw.product.feature" path="${workspace_loc:/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles}" type="Feature"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="com.google.guava" version="15.0.0.v201403281430"/>
+<unit id="com.google.guava.source" version="15.0.0.v201403281430"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20150124073747/repository/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.viatra.query.runtime.feature.feature.group" version="1.6.0.201705051632"/>
+<unit id="org.eclipse.viatra.transformation.runtime.emf.feature.feature.group" version="1.6.0.201705051632"/>
+<repository location="http://download.eclipse.org/viatra/updates/integration/1.6.0.201705051637"/>
+</location>
+</locations>
+<includeBundles>
+<plugin id="akka"/>
+<plugin id="ch.qos.logback.classic"/>
+<plugin id="ch.qos.logback.core"/>
+<plugin id="cmof" version="1.4.0.201610061849"/>
+<plugin id="com.esotericsoftware.kryo"/>
+<plugin id="com.google.guava" version="15.0.0.v201403281430"/>
+<plugin id="com.google.guava" version="18.0.0"/>
+<plugin id="com.google.guava.source"/>
+<plugin id="com.nomagic.annotations"/>
+<plugin id="com.nomagic.ci"/>
+<plugin id="com.nomagic.ci.binary"/>
+<plugin id="com.nomagic.ci.metamodel.project"/>
+<plugin id="com.nomagic.ci.persistence"/>
+<plugin id="com.nomagic.ci.persistence.local"/>
+<plugin id="com.nomagic.ci.services"/>
+<plugin id="com.nomagic.esi.api" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.client.core" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.client.lockservice" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.common" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.config" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.core.msg" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.emf" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.kryoregistrations" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.lockservice.msg"/>
+<plugin id="com.nomagic.esi.net" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.net.akkafragment" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.serializer" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.service.actorsystem" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.services" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.esi.supervisor" version="1.0.0.v20160721-1407"/>
+<plugin id="com.nomagic.magicdraw" version="17.0.5.201610061849"/>
+<plugin id="com.nomagic.magicdraw.ce" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.core" version="1.0.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.core.diagram" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.core.project.options" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.esi.binary.metamodel" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.esi.esiproject" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.esi.uuidmap" version="18.1.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.foundation" version="2.0.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.osgi.fragment" version="1.0.0.201610061849"/>
+<plugin id="com.nomagic.magicdraw.security"/>
+<plugin id="com.nomagic.magicdraw.uml2" version="2.5.0.201610061849"/>
+<plugin id="com.typesafe.config"/>
+<plugin id="de.schlichtherle.truezip"/>
+<plugin id="gnu.trove"/>
+<plugin id="io.netty.buffer"/>
+<plugin id="io.netty.codec"/>
+<plugin id="io.netty.common"/>
+<plugin id="io.netty.handler"/>
+<plugin id="io.netty.transport"/>
+<plugin id="javax.jmi" version="1.0.0.201610061849"/>
+<plugin id="joda-time"/>
+<plugin id="joda-time.source"/>
+<plugin id="lz4-java"/>
+<plugin id="md_ocl2" version="1.0.0.201610061849"/>
+<plugin id="org.apache.commons.codec"/>
+<plugin id="org.apache.commons.collections"/>
+<plugin id="org.apache.commons.compress"/>
+<plugin id="org.apache.commons.lang"/>
+<plugin id="org.apache.log4j"/>
+<plugin id="org.apache.servicemix.bundles.jsr305"/>
+<plugin id="org.eclipse.core.contenttype"/>
+<plugin id="org.eclipse.core.jobs"/>
+<plugin id="org.eclipse.core.runtime"/>
+<plugin id="org.eclipse.emf.common"/>
+<plugin id="org.eclipse.emf.ecore"/>
+<plugin id="org.eclipse.emf.ecore.change"/>
+<plugin id="org.eclipse.emf.ecore.xmi"/>
+<plugin id="org.eclipse.emf.edit"/>
+<plugin id="org.eclipse.equinox.app"/>
+<plugin id="org.eclipse.equinox.common"/>
+<plugin id="org.eclipse.equinox.ds"/>
+<plugin id="org.eclipse.equinox.preferences"/>
+<plugin id="org.eclipse.equinox.registry"/>
+<plugin id="org.eclipse.equinox.util"/>
+<plugin id="org.eclipse.jdt.junit.runtime"/>
+<plugin id="org.eclipse.jdt.junit4.runtime"/>
+<plugin id="org.eclipse.osgi"/>
+<plugin id="org.eclipse.osgi.services"/>
+<plugin id="org.eclipse.pde.junit.runtime"/>
+<plugin id="org.eclipse.uml2.common"/>
+<plugin id="org.eclipse.viatra.query.runtime"/>
+<plugin id="org.eclipse.viatra.query.runtime.base"/>
+<plugin id="org.eclipse.viatra.query.runtime.base.itc"/>
+<plugin id="org.eclipse.viatra.query.runtime.base.itc.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.base.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.localsearch"/>
+<plugin id="org.eclipse.viatra.query.runtime.localsearch.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.matchers"/>
+<plugin id="org.eclipse.viatra.query.runtime.matchers.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.rete"/>
+<plugin id="org.eclipse.viatra.query.runtime.rete.recipes"/>
+<plugin id="org.eclipse.viatra.query.runtime.rete.recipes.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.rete.source"/>
+<plugin id="org.eclipse.viatra.query.runtime.source"/>
+<plugin id="org.eclipse.viatra.transformation.evm"/>
+<plugin id="org.eclipse.viatra.transformation.evm.source"/>
+<plugin id="org.eclipse.viatra.transformation.runtime.emf"/>
+<plugin id="org.eclipse.viatra.transformation.runtime.emf.source"/>
+<plugin id="org.eclipse.xtend.lib"/>
+<plugin id="org.eclipse.xtend.lib.macro"/>
+<plugin id="org.eclipse.xtend.lib.macro.source"/>
+<plugin id="org.eclipse.xtend.lib.source"/>
+<plugin id="org.eclipse.xtext.xbase.lib"/>
+<plugin id="org.eclipse.xtext.xbase.lib.source"/>
+<plugin id="org.hamcrest.core"/>
+<plugin id="org.hamcrest.core.source"/>
+<plugin id="org.jboss.netty"/>
+<plugin id="org.junit"/>
+<plugin id="org.junit.source"/>
+<plugin id="org.scala-lang.scala-reflect"/>
+<plugin id="scala"/>
+<plugin id="slf4j.api"/>
+</includeBundles>
+</target>
