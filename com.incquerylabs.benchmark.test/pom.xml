@@ -159,7 +159,7 @@
 			<artifactId>core</artifactId>
 			<version>0.1.0</version>
 			<scope>system</scope>
-			<systemPath>${project.build.directory}/../../eu.mondo.sam.bundle/lib/eu.mondo.sam.core-0.1.0.jar</systemPath>
+			<systemPath>${basedir}/../eu.mondo.sam.bundle/lib/eu.mondo.sam.core-0.1.0.jar</systemPath>
 		</dependency>
 
 		<dependency>
