@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin
         id="com.incquerylabs.instaschema.tests"
-		name="InstaSchema Tests"
+		name="VIATRA Query Benchmark Tests"
 		version="1.0"
 		class-lookup="GlobalFirst"
 		provider-name="IncQuery Labs Ltd."
@@ -15,7 +15,7 @@
 	</requires>
 
     <runtime>
-        <library name="instaschema.test.jar"/>
+        <library name="benchmark.test.jar"/>
         <library name="lib/junit.jar"/>
         <library name="lib/maven-surefire-common.jar"/>
         <library name="lib/surefire-api.jar"/>
