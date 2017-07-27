@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.google.common.collect.ImmutableSet;
 import com.incquerylabs.instaschema.mondo.sam.MultipleQueriesScenario;
 import com.incquerylabs.instaschema.mondo.sam.MyDataToken;
 import com.incquerylabs.instaschema.performance.EngineImpl;
