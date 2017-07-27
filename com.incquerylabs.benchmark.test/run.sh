@@ -25,6 +25,7 @@ MD_OSGI_FRAGMENT=$(echo "$MD_HOME"/lib/bundles/com.nomagic.magicdraw.osgi.fragme
 if [ -z "$BENCHMARK_TEST_SUITE" ]; then
 	BENCHMARK_TEST_SUITE=MiniTests
 fi
+echo "Selected test suite: ${BENCHMARK_TEST_SUITE}"
  
 CP="${OSGI_LAUNCHER}${cp_delim}${OSGI_FRAMEWORK}${cp_delim}${MD_OSGI_FRAGMENT}${cp_delim}\
 `  `$MD_HOME/lib/md_api.jar${cp_delim}$MD_HOME/lib/md_common_api.jar${cp_delim}\
@@ -39,6 +40,6 @@ java -Xmx8G -Xms4G -Xss1024K \
      -Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
      -Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
      -Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.validation.test.runner.TestRunner \
-	 -Dcom.incquerylabs.magicdraw.benchmark.testsuite=$BENCHMARK_TEST_SUITE
+	 -Dcom.incquerylabs.magicdraw.benchmark.testsuite=${BENCHMARK_TEST_SUITE}
      -cp "$CP" \
      com.nomagic.osgi.launcher.ProductionFrameworkLauncher "$@"
