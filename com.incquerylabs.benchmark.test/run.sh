@@ -22,24 +22,72 @@ OSGI_LAUNCHER=$(echo "$MD_HOME"/lib/com.nomagic.osgi.launcher-*.jar)
 OSGI_FRAMEWORK=$(echo "$MD_HOME"/lib/bundles/org.eclipse.osgi_*.jar)
 MD_OSGI_FRAGMENT=$(echo "$MD_HOME"/lib/bundles/com.nomagic.magicdraw.osgi.fragment_*.jar)
  
-if [ -z "$BENCHMARK_TEST_SUITE" ]; then
-	BENCHMARK_TEST_SUITE=MiniTests
-fi
-echo "Selected test suite: ${BENCHMARK_TEST_SUITE}"
- 
+
 CP="${OSGI_LAUNCHER}${cp_delim}${OSGI_FRAMEWORK}${cp_delim}${MD_OSGI_FRAGMENT}${cp_delim}\
 `  `$MD_HOME/lib/md_api.jar${cp_delim}$MD_HOME/lib/md_common_api.jar${cp_delim}\
 `  `$MD_HOME/lib/md.jar${cp_delim}$MD_HOME/lib/md_common.jar${cp_delim}\
 `  `$MD_HOME/lib/jna.jar"
 
-java -Xmx8G -Xms4G -Xss1024K \
-     -Dmd.class.path=$md_cp_url \
-     -Dcom.nomagic.osgi.config.dir="$MD_HOME/configuration" \
-     -Desi.system.config="$MD_HOME/data/application.conf" \
-     -Dlogback.configurationFile="$MD_HOME/data/logback.xml" \
-     -Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
-     -Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
-     -Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.validation.test.runner.TestRunner \
-	 -Dcom.incquerylabs.magicdraw.benchmark.testsuite=${BENCHMARK_TEST_SUITE} \
-     -cp "$CP" \
-     com.nomagic.osgi.launcher.ProductionFrameworkLauncher "$@"
+# Setup benchmark
+if [ -z "$BENCHMARK_ENGINES" ]; then
+#BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS, HYBRID"
+BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS, HYBRID"
+fi
+echo "Selected engines: ${BENCHMARK_ENGINES}"
+
+if [ -z "$BENCHMARK_QUERIES" ]; then
+#BENCHMARK_QUERIES="blocksOrRequirementsOrConstraints, alphabeticalDependencies, circularDependencies, loopTransitionWithTriggerEffectEventNoGuard, stateWithMostSubstates, transitiveSubstatesWithCheck3"
+BENCHMARK_QUERIES="transitiveSubstatesWithCheck3"
+fi
+echo "Selected queries: ${BENCHMARK_QUERIES}"
+
+if [ -z "$BENCHMARK_SIZES" ]; then
+#BENCHMARK_SIZES="300000, 540000, 780000, 1040000, 1200000"
+BENCHMARK_SIZES="300000"
+fi
+echo "Selected sizes: ${BENCHMARK_SIZES}"
+
+if [ -z "$BENCHMARK_RUNS" ]; then
+BENCHMARK_RUNS=1
+fi
+echo "Number of runs: ${BENCHMARK_RUNS}"
+
+IFS=', ' read -r -a engines <<< "$BENCHMARK_ENGINES"
+IFS=', ' read -r -a queries <<< "$BENCHMARK_QUERIES"
+IFS=', ' read -r -a modelsizes <<< "$BENCHMARK_SIZES"
+
+# Run benchmark
+for runIndex in `seq 1 "$BENCHMARK_RUNS"`;
+do
+	
+	echo "Run: $runIndex"
+	for engine in "${engines[@]}";
+	do
+		echo "Engine: $engine"
+		for size in "${modelsizes[@]}";
+		do
+			echo "Model size: $size"
+			
+			for query in "${queries[@]}";
+			do
+				echo "Query: $query"
+				# Call MD
+				java -Xmx8G -Xms4G -Xss1024K \
+					-Dmd.class.path=$md_cp_url \
+					-Dcom.nomagic.osgi.config.dir="$MD_HOME/configuration" \
+					-Desi.system.config="$MD_HOME/data/application.conf" \
+					-Dlogback.configurationFile="$MD_HOME/data/logback.xml" \
+					-Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
+					-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
+					-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.validation.test.runner.TestRunner \
+					-Dcom.incquerylabs.magicdraw.benchmark.engine=$engine \
+					-Dcom.incquerylabs.magicdraw.benchmark.query=$query \
+					-Dcom.incquerylabs.magicdraw.benchmark.size=$size \
+					-Dcom.incquerylabs.magicdraw.benchmark.runIndex=$runIndex \
+					-cp "$CP" \
+					com.nomagic.osgi.launcher.ProductionFrameworkLauncher "$@"
+			done
+		done
+	done
+done
+

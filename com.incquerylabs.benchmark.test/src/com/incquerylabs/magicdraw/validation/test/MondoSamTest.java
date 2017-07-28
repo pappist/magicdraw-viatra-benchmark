@@ -38,7 +38,6 @@ public class MondoSamTest {
 
 
 	private static final String MODEL = "TMT";
-	private static final Integer[] MODELSIZES = new Integer[]{300000, 540000, 780000, 1040000, 1200000}; 
 	private static final String WARMUP_MODEL = "Warmup";
 
 	// The input models must be stored in these folders
@@ -68,33 +67,67 @@ public class MondoSamTest {
 
 	@Test
 	public void runPerformanceMeasurement() throws Exception {
-		for (Integer size : getModelSizes()) {
-			for (int runIndex = 1; runIndex <= getNumberOfRuns(); runIndex++) {
-//				System.out.println("Opening "+MODEL+size+" project...");
-//				openProject(INPUT_PATH+MODEL+size+".mdzip");
-//				System.out.println("Project opened.");
-
-				localSearchIndividually(RESULT_PATH, size, runIndex);
-				reteIndividually(RESULT_PATH, size, runIndex);
-				hybridIndividually(RESULT_PATH, size, runIndex);
-				incomingTransitionsHint(RESULT_PATH, size, runIndex);
-				parentStatesHint(RESULT_PATH, size, runIndex);
+		int size = getModelSize();
+		int runIndex = getRunIndex();
+		System.out.println("Opening "+MODEL+size+" project...");
+		openProject(INPUT_PATH+MODEL+size+".mdzip");
+		System.out.println("Project opened.");
+		
+        String engine = getEngine();
+		if("RETE".equals(engine)) {
+		    reteIndividually(RESULT_PATH, size, runIndex);
+		} else if ("LOCAL_SEARCH".equals(engine)) {
+		    localSearchIndividually(RESULT_PATH, size, runIndex);
+		} else if ("LOCAL_SEARCH_HINTS".equals(engine)) {
+		    incomingTransitionsHint(RESULT_PATH, size, runIndex);
+		    parentStatesHint(RESULT_PATH, size, runIndex);
+		} else if ("HYBRID".equals(engine)) {
+		    hybridIndividually(RESULT_PATH, size, runIndex);
+		}
 
 //				System.out.println("Closing "+MODEL+size+" project...");
 //				Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
 //				System.out.println("The "+MODEL+size+" project has been closed.");
-			}
-		}
 
 
 	}
 
-    protected int getNumberOfRuns() {
-        return RUNS;
+    protected int getRunIndex() {
+        String runIndexString = System.getProperty("com.incquerylabs.magicdraw.benchmark.runIndex");
+        
+        int runIndex = 1;
+        if (runIndexString != null) {
+            runIndex = Integer.parseInt(runIndexString);
+        }
+        return runIndex;
     }
 
-    protected Integer[] getModelSizes() {
-        return MODELSIZES;
+    protected int getModelSize() {
+        String modelSizeString = System.getProperty("com.incquerylabs.magicdraw.benchmark.size");
+        
+        int modelSize = 300000;
+        if (modelSizeString != null) {
+            modelSize = Integer.parseInt(modelSizeString);
+        }
+        return modelSize;
+    }
+    
+    protected String getEngine() {
+        String engine = System.getProperty("com.incquerylabs.magicdraw.benchmark.engine");
+        
+        if (engine == null) {
+            engine = "RETE";
+        }
+        return engine;
+    }
+    
+    protected String getQuery() {
+        String query = System.getProperty("com.incquerylabs.magicdraw.benchmark.query");
+        
+        if (query == null) {
+            query = "transitiveSubstatesWithCheck3";
+        }
+        return query;
     }
 
 	private void localSearchIndividually(String resultPath, Integer size, int runIndex) throws Exception {
@@ -189,7 +222,7 @@ public class MondoSamTest {
 		scenario.setSize(size);
 		engine.runBenchmark(scenario, token);
 		
-		Application.getInstance().getProjectsManager().closeProject();
+		Application.getInstance().getProjectsManager().closeProjectNoSave();
 	}
 
 	private BenchmarkEngine initBenchmark(String resultPath) {
@@ -230,9 +263,9 @@ public class MondoSamTest {
     }
 	
 	private List<IQuerySpecification<?>> sort(Collection<IQuerySpecification<?>> querySpecifications) throws ViatraQueryException {
-		
+		String query = getQuery();
 		return querySpecifications.stream().sorted((a, b) -> a.getFullyQualifiedName().compareTo(b.getFullyQualifiedName()))
-				.collect(Collectors.toList());
+		        .filter(spec -> getName(spec).equals(query)).collect(Collectors.toList());
 	}
 
 	/**

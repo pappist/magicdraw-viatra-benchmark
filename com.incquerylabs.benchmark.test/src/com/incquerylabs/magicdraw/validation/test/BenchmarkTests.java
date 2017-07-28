@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ MiniBenchmarkTest.class })
-public class MiniTests {
+@SuiteClasses({ MondoSamTest.class })
+public class BenchmarkTests {
 
 }
