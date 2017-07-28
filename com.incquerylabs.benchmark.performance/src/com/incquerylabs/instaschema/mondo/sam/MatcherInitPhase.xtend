@@ -1,9 +1,10 @@
 package com.incquerylabs.instaschema.mondo.sam
 
+import com.google.common.collect.ImmutableSet
 import eu.mondo.sam.core.DataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
-import eu.mondo.sam.core.metrics.TimeMetric
 import eu.mondo.sam.core.metrics.ScalarMetric
+import eu.mondo.sam.core.metrics.TimeMetric
 import eu.mondo.sam.core.phases.AtomicPhase
 import eu.mondo.sam.core.results.PhaseResult
 import java.util.HashSet
@@ -26,9 +27,6 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil
-import com.google.common.collect.ImmutableSet
-import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchResultProvider
-import org.eclipse.viatra.query.runtime.matchers.context.IndexingService
 
 class MatcherInitPhase extends AtomicPhase {
 	
@@ -46,7 +44,7 @@ class MatcherInitPhase extends AtomicPhase {
 
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
-		val prememory = new MemoryMetric("Memory")
+		val prememory = new MemoryMetric("PreMemory")
 		val memory = new MemoryMetric("Memory")
 		prememory.measure
 		
@@ -71,7 +69,7 @@ class MatcherInitPhase extends AtomicPhase {
 		val memoryDelta = new ScalarMetric("MemoryDelta")
         memoryDelta.value = Long.parseLong(memory.value)-Long.parseLong(prememory.value)
         
-		phaseResult.addMetrics(timer, memory)
+		phaseResult.addMetrics(timer, prememory, memory, memoryDelta)
 	}
 	
 	private def getName(IQuerySpecification<?> querySpecification) {
