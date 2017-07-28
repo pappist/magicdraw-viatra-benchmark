@@ -3,6 +3,7 @@ package com.incquerylabs.instaschema.mondo.sam
 import eu.mondo.sam.core.DataToken
 import eu.mondo.sam.core.metrics.MemoryMetric
 import eu.mondo.sam.core.metrics.TimeMetric
+import eu.mondo.sam.core.metrics.ScalarMetric
 import eu.mondo.sam.core.phases.AtomicPhase
 import eu.mondo.sam.core.results.PhaseResult
 import java.util.HashSet
@@ -45,6 +46,9 @@ class MatcherInitPhase extends AtomicPhase {
 
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
+		val prememory = new MemoryMetric("Memory")
+		val memory = new MemoryMetric("Memory")
+		prememory.measure
 		
 		ViatraQueryLoggingUtil.defaultLogger. info("Measuring " + querySpecification.name + "...")
 		println("Measuring " + querySpecification.name + "...")
@@ -62,8 +66,12 @@ class MatcherInitPhase extends AtomicPhase {
 		dataToken.matcher = querySpecification.getMatcher(dataToken.engine)
 		
 		timer.stopMeasure
+		memory.measure
 		
-		phaseResult.addMetrics(timer)
+		val memoryDelta = new ScalarMetric("MemoryDelta")
+        memoryDelta.value = Long.parseLong(memory.value)-Long.parseLong(prememory.value)
+        
+		phaseResult.addMetrics(timer, memory)
 	}
 	
 	private def getName(IQuerySpecification<?> querySpecification) {
