@@ -10,6 +10,7 @@ import org.junit.runner.JUnitCore;
 
 import com.incquerylabs.magicdraw.validation.test.AllTests;
 import com.incquerylabs.magicdraw.validation.test.MiniTests;
+import com.incquerylabs.magicdraw.validation.test.ReducedTests;
 import com.nomagic.magicdraw.commandline.CommandLineAction;
 
 public class TestRunner implements CommandLineAction{
@@ -26,6 +27,8 @@ public class TestRunner implements CommandLineAction{
 	    
 	    if(AllTests.class.getSimpleName().equals(testSuite)) {
 	        testSuiteClass = AllTests.class;
+	    } else if (ReducedTests.class.getSimpleName().equals(testSuite)) {
+	        testSuiteClass = ReducedTests.class;
 	    }
 	    
 		JUnitCore core = new JUnitCore();

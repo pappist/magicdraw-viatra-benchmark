@@ -251,6 +251,13 @@ pattern incomingTransitions(transition : Transition, targetState : State) {
 }
 
 /**
+ * Reusing a simple pattern with transitive closure.
+ */
+pattern transitiveSubstates(state : State, transitiveSubstate : State) {
+	find parentState+(transitiveSubstate, state);
+}
+
+/**
  * Reusing a simple pattern with a check expression before the transitive closure.
  */
 pattern transitiveSubstatesWithCheck(state : State, transitiveSubstate : State) {
@@ -287,7 +294,7 @@ pattern transitiveSubstatesWithCheck3(state : State, transitiveSubstate : State)
  * Reusing a transitive closure pattern with the count aggregator.
  */
 pattern numberOfTransitiveSubstates(state : State, transitiveSubstateCount : java ^java.lang.Integer) {
-	transitiveSubstateCount == count find transitiveSubstatesWithCheck(state, _);
+	transitiveSubstateCount == count find transitiveSubstates(state, _);
 }
 
 /**
