@@ -71,6 +71,7 @@ do
 			for query in "${queries[@]}";
 			do
 				echo "Query: $query"
+				echo "Running measurement on $query with $engine (model size: $size ; runIndex: $runIndex )"
 				# Call MD
 				java -Xmx8G -Xms4G -Xss1024K \
 					-Dmd.class.path=$md_cp_url \
