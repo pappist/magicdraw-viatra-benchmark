@@ -175,7 +175,6 @@ public class MondoSamTest {
 	private BenchmarkEngine initBenchmark(String resultPath) {
 		BenchmarkEngine engine = new BenchmarkEngine();
 		JsonSerializer.setResultPath(resultPath);
-		MemoryMetric.setNumberOfGC(5);
 		return engine;
 	}
 
