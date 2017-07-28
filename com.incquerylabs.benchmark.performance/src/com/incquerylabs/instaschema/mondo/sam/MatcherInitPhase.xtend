@@ -68,7 +68,7 @@ class MatcherInitPhase extends AtomicPhase {
 		
 		val memoryDelta = new ScalarMetric("MemoryDelta")
 		
-        memoryDelta.value = Math.min(Long.parseLong(memory.value)-Long.parseLong(prememory.value), 1)
+        memoryDelta.value = Math.max(Long.parseLong(memory.value)-Long.parseLong(prememory.value), 1)
         
 		phaseResult.addMetrics(timer, prememory, memory, memoryDelta)
 	}
