@@ -38,7 +38,7 @@ public class MondoSamTest {
 
 
 	private static final String MODEL = "TMT";
-private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 780000, 1040000, 1200000*/}; 
+	private static final Integer[] MODELSIZES = new Integer[]{300000, 540000, 780000, 1040000, 1200000}; 
 	private static final String WARMUP_MODEL = "Warmup";
 
 	// The input models must be stored in these folders
@@ -68,7 +68,7 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 
 	@Test
 	public void runPerformanceMeasurement() throws Exception {
-		for (Integer size : MODELSIZES) {
+		for (Integer size : getModelSizes()) {
 			for (int runIndex = 1; runIndex <= RUNS; runIndex++) {
 				System.out.println("Opening "+MODEL+size+" project...");
 				openProject(INPUT_PATH+MODEL+size+".mdzip");
@@ -88,6 +88,10 @@ private static final Integer[] MODELSIZES = new Integer[]{300000/*, 540000, 7800
 
 
 	}
+
+    protected Integer[] getModelSizes() {
+        return MODELSIZES;
+    }
 
 	private void localSearchIndividually(String resultPath, Integer size, int runIndex) throws Exception {
 		for (IQuerySpecification<?> querySpecification : sort(getLSQuerySpecifications())) {

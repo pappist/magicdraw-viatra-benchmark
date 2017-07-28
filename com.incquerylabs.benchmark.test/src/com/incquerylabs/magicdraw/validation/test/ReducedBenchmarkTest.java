@@ -36,4 +36,9 @@ public class ReducedBenchmarkTest extends MondoSamTest {
                 .build();
         return queries;
     }
+    
+    @Override
+    protected Integer[] getModelSizes() {
+        return new Integer[]{300000, 540000, 780000, 1040000, 1200000};
+    }
 }

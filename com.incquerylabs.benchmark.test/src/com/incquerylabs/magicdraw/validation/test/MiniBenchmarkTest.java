@@ -31,4 +31,9 @@ public class MiniBenchmarkTest extends MondoSamTest {
                 .build();
         return queries;
     }
+    
+    @Override
+    protected Integer[] getModelSizes() {
+        return new Integer[]{300000};
+    }
 }
