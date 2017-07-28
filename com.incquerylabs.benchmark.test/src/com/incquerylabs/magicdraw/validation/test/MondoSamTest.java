@@ -69,7 +69,7 @@ public class MondoSamTest {
 	@Test
 	public void runPerformanceMeasurement() throws Exception {
 		for (Integer size : getModelSizes()) {
-			for (int runIndex = 1; runIndex <= RUNS; runIndex++) {
+			for (int runIndex = 1; runIndex <= getNumberOfRuns(); runIndex++) {
 				System.out.println("Opening "+MODEL+size+" project...");
 				openProject(INPUT_PATH+MODEL+size+".mdzip");
 				System.out.println("Project opened.");
@@ -88,6 +88,10 @@ public class MondoSamTest {
 
 
 	}
+
+    protected int getNumberOfRuns() {
+        return RUNS;
+    }
 
     protected Integer[] getModelSizes() {
         return MODELSIZES;

@@ -39,6 +39,7 @@ public class ReducedBenchmarkTest extends MondoSamTest {
     
     @Override
     protected Integer[] getModelSizes() {
-        return new Integer[]{300000, 540000, 780000, 1040000, 1200000};
+        return new Integer[]{300000, 540000, 780000};
     }
+    
 }

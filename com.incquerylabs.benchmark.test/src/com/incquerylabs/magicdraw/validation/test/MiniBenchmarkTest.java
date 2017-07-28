@@ -14,6 +14,11 @@ public class MiniBenchmarkTest extends MondoSamTest {
     protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() throws ViatraQueryException {
         
         final ImmutableSet<IQuerySpecification<?>> queries = ImmutableSet.<IQuerySpecification<?>>builder()
+                .add(APerformanceQueries.instance().getBlocksOrRequirementsOrConstraints())
+                .add(APerformanceQueries.instance().getAlphabeticalDependencies())
+                .add(APerformanceQueries.instance().getCircularDependencies())
+                .add(APerformanceQueries.instance().getLoopTransitionWithTriggerEffectEventNoGuard())
+                .add(APerformanceQueries.instance().getStateWithMostSubstates())
                 .add(APerformanceQueries.instance().getTransitiveSubstatesWithCheck3())
                 .build();
         return queries;
@@ -35,5 +40,10 @@ public class MiniBenchmarkTest extends MondoSamTest {
     @Override
     protected Integer[] getModelSizes() {
         return new Integer[]{300000};
+    }
+    
+    @Override
+    protected int getNumberOfRuns() {
+        return 1;
     }
 }
