@@ -78,8 +78,9 @@ public class MondoSamTest {
 		    reteIndividually(RESULT_PATH, size, runIndex);
 		} else if ("LOCAL_SEARCH".equals(engine)) {
 		    localSearchIndividually(RESULT_PATH, size, runIndex);
-		} else if ("LOCAL_SEARCH_HINTS".equals(engine)) {
+		} else if ("LOCAL_SEARCH_HINTS-CONDITION_FIRST".equals(engine)) {
 		    incomingTransitionsHint(RESULT_PATH, size, runIndex);
+		} else if ("LOCAL_SEARCH_HINTS-TC_FIRST".equals(engine)) {
 		    parentStatesHint(RESULT_PATH, size, runIndex);
 		} else if ("HYBRID".equals(engine)) {
 		    hybridIndividually(RESULT_PATH, size, runIndex);
