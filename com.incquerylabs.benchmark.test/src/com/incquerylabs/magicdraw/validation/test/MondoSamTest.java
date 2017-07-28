@@ -112,7 +112,7 @@ public class MondoSamTest {
 			scenario.setSize(size);
 			engine.runBenchmark(scenario, token);
 			
-			Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+			Application.getInstance().getProjectsManager().closeProjectNoSave();
 		}
 	}
 
@@ -131,7 +131,7 @@ public class MondoSamTest {
 			scenario.setSize(size);
 			engine.runBenchmark(scenario, token);
 			
-			Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+			Application.getInstance().getProjectsManager().closeProjectNoSave();
 		}
 	}
 
@@ -150,7 +150,7 @@ public class MondoSamTest {
 			scenario.setSize(size);
 			engine.runBenchmark(scenario, token);
 			
-			Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+			Application.getInstance().getProjectsManager().closeProjectNoSave();
 		}
 	}
 
@@ -170,7 +170,7 @@ public class MondoSamTest {
 		scenario.setSize(size);
 		engine.runBenchmark(scenario, token);
 		
-		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+		Application.getInstance().getProjectsManager().closeProjectNoSave();
 	}
 
 	private void parentStatesHint(String resultPath, Integer size, int runIndex) throws Exception {
@@ -189,7 +189,7 @@ public class MondoSamTest {
 		scenario.setSize(size);
 		engine.runBenchmark(scenario, token);
 		
-		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+		Application.getInstance().getProjectsManager().closeProject();
 	}
 
 	private BenchmarkEngine initBenchmark(String resultPath) {
@@ -205,7 +205,7 @@ public class MondoSamTest {
 	 */
 	private static void warmUpJvm(String warmUpProjectPath) throws Exception {
 		// Opening project for warm up
-		openProject(warmUpProjectPath);
+//		openProject(warmUpProjectPath);
 		// Executing the exact same phases with a trivial sized model (to avoid class loading as much as possible)
 		MondoSamTest mondoSamTest = new MondoSamTest();
 		mondoSamTest.localSearchIndividually(WARMUP_RESULT_PATH, 5000, 1);
@@ -214,7 +214,7 @@ public class MondoSamTest {
 		mondoSamTest.incomingTransitionsHint(WARMUP_RESULT_PATH, 5000, 1);
 		mondoSamTest.parentStatesHint(WARMUP_RESULT_PATH, 5000, 1);
 		// Closing the project
-		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
+//		Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
 	}
 
 	protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() throws ViatraQueryException {
