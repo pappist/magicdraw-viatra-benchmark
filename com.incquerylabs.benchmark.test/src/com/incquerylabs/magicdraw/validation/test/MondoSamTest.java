@@ -59,37 +59,63 @@ public class MondoSamTest {
 	}
 
 	private static void openProject(String projectPath) {
+	    System.out.println("Opening "+MODEL+size+" project...");
 		File file = new File(projectPath);
 		ProjectDescriptor descriptor = ProjectDescriptorsFactory.createProjectDescriptor(file.toURI());
 		Application.getInstance().getProjectsManager().loadProject(descriptor, true);
-
+		System.out.println("Project opened.");
 	}
 
 	@Test
 	public void runPerformanceMeasurement() throws Exception {
-		int size = getModelSize();
-		int runIndex = getRunIndex();
-		System.out.println("Opening "+MODEL+size+" project...");
-		openProject(INPUT_PATH+MODEL+size+".mdzip");
-		System.out.println("Project opened.");
+	    int size = getModelSize();
+	    int runIndex = getRunIndex();
+	    String modelPath = INPUT_PATH+MODEL+size;
+	    runMeasurementOnModel(modelPath, RESULT_PATH, size, runIndex);
+	}
+	
+	protected void runMeasurementOnModel(String modelPath, String resultPath, int size, int runIndex) throws Exception {
 		
         String engine = getEngine();
 		if("RETE".equals(engine)) {
-		    reteIndividually(RESULT_PATH, size, runIndex);
+		    List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
+	        if (specs.isEmpty()) {
+	            return;
+	        }
+		    openProject(modelPath+".mdzip");
+		    reteIndividually(resultPath, size, runIndex);
+	        Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("LOCAL_SEARCH".equals(engine)) {
-		    localSearchIndividually(RESULT_PATH, size, runIndex);
+		    List<IQuerySpecification<?>> specs = sort(getLSQuerySpecifications());
+	        if (specs.isEmpty()) {
+	            return;
+	        }
+		    openProject(modelPath+".mdzip");
+		    localSearchIndividually(resultPath, size, runIndex);
+		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("LOCAL_SEARCH_HINTS-CONDITION_FIRST".equals(engine)) {
-		    incomingTransitionsHint(RESULT_PATH, size, runIndex);
+		    if(!getQuery().equals(getName(TransitiveSubstatesWithCheck3QuerySpecification.instance()))) {
+	            return;
+	        }
+		    openProject(modelPath+".mdzip");
+		    incomingTransitionsHint(resultPath, size, runIndex);
+		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("LOCAL_SEARCH_HINTS-TC_FIRST".equals(engine)) {
-		    parentStatesHint(RESULT_PATH, size, runIndex);
+		    if(!getQuery().equals(getName(TransitiveSubstatesWithCheck3QuerySpecification.instance()))) {
+	            return;
+	        }
+		    openProject(modelPath+".mdzip");
+		    parentStatesHint(resultPath, size, runIndex);
+		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("HYBRID".equals(engine)) {
-		    hybridIndividually(RESULT_PATH, size, runIndex);
+		    List<IQuerySpecification<?>> specs = sort(getHybridQuerySpecifications());
+		    if (specs.isEmpty()) {
+		        return;
+		    }
+		    openProject(modelPath+".mdzip");
+		    hybridIndividually(resultPath, size, runIndex);
+		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		}
-
-//				System.out.println("Closing "+MODEL+size+" project...");
-//				Application.getInstance().getProjectsManager().getActiveProject().setClosing(true);
-//				System.out.println("The "+MODEL+size+" project has been closed.");
-
 
 	}
 
@@ -132,7 +158,8 @@ public class MondoSamTest {
     }
 
 	private void localSearchIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(getLSQuerySpecifications())) {
+	    List<IQuerySpecification<?>> specs = sort(getLSQuerySpecifications());
+	    for (IQuerySpecification<?> querySpecification : specs) {
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
 
@@ -147,7 +174,8 @@ public class MondoSamTest {
 	}
 
 	private void reteIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(getReteQuerySpecifications())) {
+	    List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
+        for (IQuerySpecification<?> querySpecification : specs) {
 			
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
@@ -164,7 +192,8 @@ public class MondoSamTest {
 	}
 
 	private void hybridIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-		for (IQuerySpecification<?> querySpecification : sort(getHybridQuerySpecifications())) {
+	    List<IQuerySpecification<?>> specs = sort(getHybridQuerySpecifications());
+        for (IQuerySpecification<?> querySpecification : specs) {
 			
 			String path = resultPath+getName(querySpecification)+File.separator;
 			new File(path).mkdirs();
@@ -182,8 +211,8 @@ public class MondoSamTest {
 
 
 	private void incomingTransitionsHint(String resultPath, Integer size, int runIndex) throws Exception {
-		
-		String path = resultPath+getName(TransitiveSubstatesWithCheck3QuerySpecification.instance())+File.separator;
+	    
+        String path = resultPath+getName(TransitiveSubstatesWithCheck3QuerySpecification.instance())+File.separator;
 		new File(path).mkdirs();
 		BenchmarkEngine engine = initBenchmark(path);
 
@@ -198,7 +227,11 @@ public class MondoSamTest {
 	}
 
 	private void parentStatesHint(String resultPath, Integer size, int runIndex) throws Exception {
-		
+	    if(!getQuery().equals(getName(TransitiveSubstatesWithCheck3QuerySpecification.instance()))) {
+            return;
+        }
+	    
+	    
 		String path = resultPath+getName(TransitiveSubstatesWithCheck3QuerySpecification.instance())+File.separator;
 		new File(path).mkdirs();
 		BenchmarkEngine engine = initBenchmark(path);
@@ -226,17 +259,9 @@ public class MondoSamTest {
 	 * @param warmUpProjectPath The path of the MagicDraw model
 	 */
 	private static void warmUpJvm(String warmUpProjectPath) throws Exception {
-		// Opening project for warm up
-		openProject(warmUpProjectPath);
 		// Executing the exact same phases with a trivial sized model (to avoid class loading as much as possible)
 		MondoSamTest mondoSamTest = new MondoSamTest();
-		mondoSamTest.localSearchIndividually(WARMUP_RESULT_PATH, 5000, 1);
-		mondoSamTest.reteIndividually(WARMUP_RESULT_PATH, 5000, 1);
-		mondoSamTest.hybridIndividually(WARMUP_RESULT_PATH, 5000, 1);
-		mondoSamTest.incomingTransitionsHint(WARMUP_RESULT_PATH, 5000, 1);
-		mondoSamTest.parentStatesHint(WARMUP_RESULT_PATH, 5000, 1);
-		// Closing the project
-		Application.getInstance().getProjectsManager().closeProjectNoSave();
+		mondoSamTest.runMeasurementOnModel(warmUpProjectPath, WARMUP_RESULT_PATH, 5000, 1);
 	}
 
 	protected Collection<IQuerySpecification<?>> getReteQuerySpecifications() throws ViatraQueryException {
