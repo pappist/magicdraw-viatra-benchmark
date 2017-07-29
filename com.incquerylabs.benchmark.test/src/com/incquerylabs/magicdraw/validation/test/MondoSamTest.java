@@ -59,7 +59,7 @@ public class MondoSamTest {
 	}
 
 	private static void openProject(String projectPath) {
-	    System.out.println("Opening "+MODEL+size+" project...");
+		System.out.println("Opening "+projectPath+" project...");
 		File file = new File(projectPath);
 		ProjectDescriptor descriptor = ProjectDescriptorsFactory.createProjectDescriptor(file.toURI());
 		Application.getInstance().getProjectsManager().loadProject(descriptor, true);
@@ -76,7 +76,7 @@ public class MondoSamTest {
 	
 	protected void runMeasurementOnModel(String modelPath, String resultPath, int size, int runIndex) throws Exception {
 		
-        String engine = getEngine();
+        	String engine = getEngine();
 		if("RETE".equals(engine)) {
 		    List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
 	        if (specs.isEmpty()) {
@@ -84,7 +84,7 @@ public class MondoSamTest {
 	        }
 		    openProject(modelPath+".mdzip");
 		    reteIndividually(resultPath, size, runIndex);
-	        Application.getInstance().getProjectsManager().closeProjectNoSave();
+		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("LOCAL_SEARCH".equals(engine)) {
 		    List<IQuerySpecification<?>> specs = sort(getLSQuerySpecifications());
 	        if (specs.isEmpty()) {
