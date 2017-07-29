@@ -43,7 +43,7 @@ public class MondoSamTest {
 	// The input models must be stored in these folders
 	private static final String INPUT_PATH = INSTALL_ROOT +"performance" + File.separator + "inputs" + File.separator;
 //	private static final String TMT_PROJECT_PATH = INSTALL_ROOT +"performance" + File.separator + "inputs" + File.separator + MODEL + ".mdzip";
-	private static final String WARMUP_PROJECT_PATH = INSTALL_ROOT + "performance" + File.separator + "inputs" + File.separator + WARMUP_MODEL + ".mdzip";
+	private static final String WARMUP_PROJECT_PATH = INSTALL_ROOT + "performance" + File.separator + "inputs" + File.separator + WARMUP_MODEL;
 
 	private static final String RESULT_PATH = "." + File.separator + "results" + File.separator;
 	private static final String WARMUP_RESULT_PATH = "." + File.separator + "results" + File.separator + "warmup" + File.separator;
@@ -250,7 +250,7 @@ public class MondoSamTest {
 	private BenchmarkEngine initBenchmark(String resultPath) {
 		BenchmarkEngine engine = new BenchmarkEngine();
 		JsonSerializer.setResultPath(resultPath);
-		MemoryMetric.setNumberOfGC(1);
+		MemoryMetric.setNumberOfGC(5);
 		return engine;
 	}
 
