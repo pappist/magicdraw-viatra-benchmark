@@ -307,4 +307,16 @@ pattern stateWithMostSubstates(state : State) {
 	count == max find numberOfTransitiveSubstates(_, #substateCount);
 }
 
-// Ideas: functional dependencies
+pattern allBenchMarkedQueries(param : NamedElement) {
+	find blocksOrRequirementsOrConstraints(param);
+} or {
+	find transitiveSubstatesWithCheck3(param, _);
+} or {
+	find alphabeticalDependencies(param, _);
+} or {
+	find circularDependencies(param);
+} or {
+	find loopTransitionWithTriggerEffectEventNoGuard(param, _, _, _, _);
+} or {
+	find transitionPointingOutOfCompState(param, _, _);
+} 
