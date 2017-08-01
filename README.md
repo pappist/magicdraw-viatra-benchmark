@@ -2,11 +2,22 @@
 
 ## Getting Started
 
-TODO @abelhegedus
+### Cloning this repository
+
+Use the green "Clone or download" link on the GitHub web to clone the repository and get the source.
+
+From now on, the folder that contains this README.md file on your computer is called `WORKSPACE`
+```
+export WORKSPACE=c:/git/magicdraw-viatra-benchmark
+```
+
+### Get the instance models
+
+You need to 
 
 ### Running the benchmark
 
-After you clone this repository, you can run the benchmark by executing the following commands in the root folder (that contains this README.md file as well):
+After you clone this repository, you can run the benchmark by executing the following commands in the `WORKSPACE` folder:
 ```
 #!/bin/bash
 MD_HOME=<MagicDraw Installation folder>
@@ -41,6 +52,8 @@ The following script downloads MONDO-SAM, converts the results from `com.incquer
 ```
 
 You need to set the `WORKSPACE` environment variable to the repository root as the scripts use relative paths from based from that variable.
+
+### 
 
 <!-- end of Getting started (only edit outside of section, please) -->
 
