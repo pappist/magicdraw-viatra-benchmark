@@ -30,13 +30,13 @@ CP="${OSGI_LAUNCHER}${cp_delim}${OSGI_FRAMEWORK}${cp_delim}${MD_OSGI_FRAGMENT}${
 
 # Setup benchmark
 if [ -z "$BENCHMARK_ENGINES" ]; then
-#BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS, HYBRID"
+#BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS-CONDITION_FIRST, LOCAL_SEARCH_HINTS-TC_FIRST, HYBRID"
 BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS-CONDITION_FIRST, LOCAL_SEARCH_HINTS-TC_FIRST, HYBRID"
 fi
 echo "Selected engines: ${BENCHMARK_ENGINES}"
 
 if [ -z "$BENCHMARK_QUERIES" ]; then
-#BENCHMARK_QUERIES="blocksOrRequirementsOrConstraints, alphabeticalDependencies, circularDependencies, loopTransitionWithTriggerEffectEventNoGuard, stateWithMostSubstates, transitiveSubstatesWithCheck3"
+#BENCHMARK_QUERIES="blocksOrRequirementsOrConstraints, alphabeticalDependencies, circularDependencies, loopTransitionWithTriggerEffectEventNoGuard, stateWithMostSubstates, transitiveSubstatesWithCheck3, allBenchMarkedQueries"
 BENCHMARK_QUERIES="transitiveSubstatesWithCheck3"
 fi
 echo "Selected queries: ${BENCHMARK_QUERIES}"
