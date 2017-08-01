@@ -52,6 +52,7 @@ public class MondoSamTest {
 	private static final String WARMUP_PROJECT_PATH = INSTALL_ROOT + "performance" + File.separator + "inputs" + File.separator + WARMUP_MODEL;
 
 	private static final String RESULT_PATH = "." + File.separator + "results" + File.separator;
+	private static final String LOG_PATH = "." + File.separator + "logs" + File.separator;
 	private static final String WARMUP_RESULT_PATH = "." + File.separator + "results" + File.separator + "warmup" + File.separator;
 
 	@BeforeClass
@@ -61,7 +62,7 @@ public class MondoSamTest {
 		System.out.println("Warming up...");
 		warmUpJvm(WARMUP_PROJECT_PATH);
 		System.out.println("Real measurement starting...");
-		initLogger();
+//		initLogger();
 
 	}
 
@@ -83,7 +84,7 @@ public class MondoSamTest {
 	
 	protected void runMeasurementOnModel(String modelPath, String resultPath, int size, int runIndex) throws Exception {
 		
-        	String engine = getEngine();
+    	String engine = getEngine();
 		if("RETE".equals(engine)) {
 			
 			List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
@@ -298,10 +299,10 @@ public class MondoSamTest {
 	}
 	
 	private static void initLogger() throws IOException {	
-		Logger logger = Logger.getLogger("org.eclipse.viatra.query");
+		Logger logger = Logger.getLogger("com.incquerylabs.magicdraw.benchmark");
 		logger.setLevel(Level.INFO);
 		
-		String logFilePath = RESULT_PATH+"log/benchmark.log";
+		String logFilePath = LOG_PATH+"benchmark_"+System.currentTimeMillis()+".log";
 		FileAppender fileAppender = new FileAppender(new PatternLayout(FILE_LOG_LAYOUT_PREFIX+COMMON_LAYOUT),logFilePath,true);
 		logger.addAppender(fileAppender);
 	}

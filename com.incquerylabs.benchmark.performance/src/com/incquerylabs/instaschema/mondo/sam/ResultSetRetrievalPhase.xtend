@@ -17,7 +17,7 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 	}
 	
 	override execute(DataToken token, PhaseResult phaseResult) {
-		val logger = Logger.getLogger("org.eclipse.viatra.query");
+//		val logger = Logger.getLogger("com.incquerylabs.magicdraw.benchmark");
 		val myToken = token as MyDataToken
 
 		// Time and memory are measured
