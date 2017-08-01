@@ -1,11 +1,14 @@
 package com.incquerylabs.instaschema.mondo.sam
 
 import eu.mondo.sam.core.DataToken
+import eu.mondo.sam.core.metrics.ScalarMetric
 import eu.mondo.sam.core.metrics.TimeMetric
 import eu.mondo.sam.core.phases.AtomicPhase
 import eu.mondo.sam.core.results.PhaseResult
-import eu.mondo.sam.core.metrics.MemoryMetric
-import eu.mondo.sam.core.metrics.ScalarMetric
+import org.apache.log4j.Logger
+import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchBackend
+import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchBackendFactory
+import org.eclipse.viatra.query.runtime.localsearch.profiler.LocalSearchProfilerAdapter
 
 class ResultSetRetrievalPhase extends AtomicPhase {
 	
@@ -14,10 +17,18 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 	}
 	
 	override execute(DataToken token, PhaseResult phaseResult) {
+		val logger = Logger.getLogger("org.eclipse.viatra.query");
 		val myToken = token as MyDataToken
 
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
+		
+		val queryBackend = myToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
+		val profiler = new LocalSearchProfilerAdapter()
+		if(queryBackend instanceof LocalSearchBackend){
+			queryBackend.addAdapter(profiler)	
+		}
+		
 		
 		timer.startMeasure
 				
@@ -28,7 +39,11 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 		val matchSetSize = new ScalarMetric("MatchSetSize")
 		matchSetSize.value = matches.size
 		
-		phaseResult.addMetrics(timer, matchSetSize)		
+		phaseResult.addMetrics(timer, matchSetSize)
+		
+		if(queryBackend instanceof LocalSearchBackend){
+			logger.info(profiler)
+		}		
 	}	
 	
 }

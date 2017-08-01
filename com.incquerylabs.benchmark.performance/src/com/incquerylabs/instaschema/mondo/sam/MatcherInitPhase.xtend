@@ -10,7 +10,6 @@ import eu.mondo.sam.core.results.PhaseResult
 import java.util.HashSet
 import java.util.Set
 import java.util.concurrent.Callable
-import org.apache.log4j.Logger
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EDataType
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -22,9 +21,6 @@ import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey
 import org.eclipse.viatra.query.runtime.emf.types.EClassUnscopedTransitiveInstancesKey
 import org.eclipse.viatra.query.runtime.emf.types.EDataTypeInSlotsKey
 import org.eclipse.viatra.query.runtime.emf.types.EStructuralFeatureInstancesKey
-import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchBackend
-import org.eclipse.viatra.query.runtime.localsearch.matcher.integration.LocalSearchBackendFactory
-import org.eclipse.viatra.query.runtime.localsearch.profiler.LocalSearchProfilerAdapter
 import org.eclipse.viatra.query.runtime.matchers.context.IInputKey
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint
@@ -44,8 +40,6 @@ class MatcherInitPhase extends AtomicPhase {
 	}
 	
 	override execute(DataToken token, PhaseResult phaseResult) {
-		val logger = Logger.getLogger("org.eclipse.viatra.query");
-		
 		val dataToken = token as MyDataToken
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
@@ -56,12 +50,6 @@ class MatcherInitPhase extends AtomicPhase {
 		ViatraQueryLoggingUtil.defaultLogger. info("Measuring " + querySpecification.name + "...")
 		println("Measuring " + querySpecification.name + "...")
 		timer.startMeasure
-		
-		val queryBackend = dataToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
-		val profiler = new LocalSearchProfilerAdapter()
-		if(queryBackend instanceof LocalSearchBackend){
-			queryBackend.addAdapter(profiler)	
-		}
 		
 		// Setting the indexes if needed  (decreases traversal time in case of local search)
 		if (setIndex) {
@@ -82,10 +70,6 @@ class MatcherInitPhase extends AtomicPhase {
         memoryDelta.value = Math.max(Long.parseLong(memory.value)-Long.parseLong(prememory.value), 1)
         
 		phaseResult.addMetrics(timer, prememory, memory, memoryDelta)
-						
-		if(queryBackend instanceof LocalSearchBackend){
-			logger.info(profiler)
-		}
 	}
 	
 	private def getName(IQuerySpecification<?> querySpecification) {
