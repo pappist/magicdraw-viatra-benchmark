@@ -7,18 +7,22 @@
 Use the green "Clone or download" link on the GitHub web to clone the repository and get the source.
 
 From now on, the folder that contains this README.md file on your computer is called `WORKSPACE`
-```
+
+```bash
 export WORKSPACE=c:/git/magicdraw-viatra-benchmark
 ```
 
 ### Get the instance models
 
-You need to 
+You need to put the set of instance models (`mdzip` files) that the benchmark runs on in a `benchmarking` folder inside the MagicDraw installation folder (`MD_HOME`).
+
+You can download the models from this link: TODO
 
 ### Running the benchmark
 
 After you clone this repository, you can run the benchmark by executing the following commands in the `WORKSPACE` folder:
-```
+
+```bash
 #!/bin/bash
 MD_HOME=<MagicDraw Installation folder>
 
@@ -38,7 +42,8 @@ MONDO-SAM requires [R](https://www.r-project.org/) and [Python 3](https://www.py
 You can find information on how to setup MONDO-SAM on their repository.
 
 The following script downloads MONDO-SAM, converts the results from `com.incquerylabs.benchmark.test/results/<query>` to `benchmark/results` then generates the diagrams to `benchmark/diagrams`:
-```
+
+```bash
 #!/bin/bash
 
 # clone and checkout MONDO-SAM for reporting scripts
@@ -53,7 +58,24 @@ The following script downloads MONDO-SAM, converts the results from `com.incquer
 
 You need to set the `WORKSPACE` environment variable to the repository root as the scripts use relative paths from based from that variable.
 
-### 
+### Configuring the benchmark
+
+By default, the benchmark runs on a very small subset of queries, with the smallest model and only once per measurement.
+This behaviour is configured by four variables and affects how `com.incquerylabs.benchmark.test/run.sh` behaves:
+
+The name of the variables and their possible values are the following:
+* `BENCHMARK_ENGINES`: Which query engine implementations to measure
+  * Default (all possible values): `RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS-CONDITION_FIRST, LOCAL_SEARCH_HINTS-TC_FIRST, HYBRID`
+* `BENCHMARK_QUERIES`: Which queries to measure
+  * Default: `transitiveSubstatesWithCheck3`
+  * Possible values: `blocksOrRequirementsOrConstraints, alphabeticalDependencies, circularDependencies, loopTransitionWithTriggerEffectEventNoGuard, stateWithMostSubstates, transitiveSubstatesWithCheck3, allBenchMarkedQueries`
+* `BENCHMARK_SIZES`: Which models to measure
+  * Default: `300000`
+  * Possible values: `300000, 540000, 780000, 1040000, 1200000`
+* `BENCHMARK_RUNS`: How many times the measurements should be run for each configuration
+  * Default: `1`
+  
+You can either set this in environment variables before running the benchmark or modify the `run.sh` script directly.
 
 <!-- end of Getting started (only edit outside of section, please) -->
 
