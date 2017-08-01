@@ -88,6 +88,7 @@ class EngineCreator {
 				.withDefaultBackend(LocalSearchBackendFactory.INSTANCE).withDefaultHint(hints).build();
 		val engine = AdvancedViatraQueryEngine.createUnmanagedEngine(
 				new EMFScope(Application.getInstance().getProject().getModel(), baseIndexOptions), engineOptions);
+	
 		return engine;
 	}
 
