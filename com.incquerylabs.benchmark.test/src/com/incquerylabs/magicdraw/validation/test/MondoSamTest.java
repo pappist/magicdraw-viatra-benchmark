@@ -1,11 +1,16 @@
 package com.incquerylabs.magicdraw.validation.test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.FileAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 import org.junit.BeforeClass;
@@ -31,7 +36,8 @@ import eu.mondo.sam.core.results.JsonSerializer;
 
 @RunWith(MagicDrawTestRunner.class)
 public class MondoSamTest {
-
+ 	private static String COMMON_LAYOUT = "%c{1} - %m%n";
+	private static String FILE_LOG_LAYOUT_PREFIX = "[%d{MMM/dd HH:mm:ss}] ";
 	private static final String INSTALL_ROOT = Application.environment().getInstallRoot();
 
 	private static final int RUNS = 3;
@@ -55,6 +61,7 @@ public class MondoSamTest {
 		System.out.println("Warming up...");
 		warmUpJvm(WARMUP_PROJECT_PATH);
 		System.out.println("Real measurement starting...");
+		initLogger();
 
 	}
 
@@ -78,7 +85,8 @@ public class MondoSamTest {
 		
         	String engine = getEngine();
 		if("RETE".equals(engine)) {
-		    List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
+			
+			List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
 	        if (specs.isEmpty()) {
 	            return;
 	        }
@@ -287,6 +295,15 @@ public class MondoSamTest {
 	 */
 	private String getName(IQuerySpecification<?> querySpecification) {
 		return querySpecification.getFullyQualifiedName().substring(querySpecification.getFullyQualifiedName().lastIndexOf(".") + 1);
+	}
+	
+	private static void initLogger() throws IOException {	
+		Logger logger = Logger.getLogger("org.eclipse.viatra.query");
+		logger.setLevel(Level.INFO);
+		
+		String logFilePath = RESULT_PATH+"log/benchmark.log";
+		FileAppender fileAppender = new FileAppender(new PatternLayout(FILE_LOG_LAYOUT_PREFIX+COMMON_LAYOUT),logFilePath,true);
+		logger.addAppender(fileAppender);
 	}
 
 }
