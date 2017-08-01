@@ -23,11 +23,11 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
 		
-		val queryBackend = myToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
-		val profiler = new LocalSearchProfilerAdapter()
-		if(queryBackend instanceof LocalSearchBackend){
-			queryBackend.addAdapter(profiler)	
-		}
+//		val queryBackend = myToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
+//		val profiler = new LocalSearchProfilerAdapter()
+//		if(queryBackend instanceof LocalSearchBackend){
+//			queryBackend.addAdapter(profiler)	
+//		}
 		
 		
 		timer.startMeasure
@@ -41,9 +41,9 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 		
 		phaseResult.addMetrics(timer, matchSetSize)
 		
-		if(queryBackend instanceof LocalSearchBackend){
-			logger.info(profiler)
-		}		
+//		if(queryBackend instanceof LocalSearchBackend){
+//			logger.info(profiler)
+//		}		
 	}	
 	
 }
