@@ -80,7 +80,7 @@ do
 					-Dlogback.configurationFile="$MD_HOME/data/logback.xml" \
 					-Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
 					-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
-					-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.validation.test.runner.TestRunner \
+					-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.instaschema.performance.benchmark.PerformanceBenchmarkRunner \
 					-Dcom.incquerylabs.magicdraw.benchmark.engine=$engine \
 					-Dcom.incquerylabs.magicdraw.benchmark.query=$query \
 					-Dcom.incquerylabs.magicdraw.benchmark.size=$size \

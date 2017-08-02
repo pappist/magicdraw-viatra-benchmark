@@ -1,11 +1,10 @@
-package com.incquerylabs.magicdraw.validation.test;
+package com.incquerylabs.instaschema.performance.benchmark;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Level;
@@ -13,9 +12,6 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.incquerylabs.instaschema.mondo.sam.MultipleQueriesScenario;
 import com.incquerylabs.instaschema.mondo.sam.MyDataToken;
@@ -28,14 +24,12 @@ import com.incquerylabs.instaschema.performance.queries.util.TransitiveSubstates
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.project.ProjectDescriptor;
 import com.nomagic.magicdraw.core.project.ProjectDescriptorsFactory;
-import com.nomagic.magicdraw.tests.MagicDrawTestRunner;
 
 import eu.mondo.sam.core.BenchmarkEngine;
 import eu.mondo.sam.core.metrics.MemoryMetric;
 import eu.mondo.sam.core.results.JsonSerializer;
 
-@RunWith(MagicDrawTestRunner.class)
-public class MondoSamTest {
+public class MondoSamRunner {
  	private static String COMMON_LAYOUT = "%c{1} - %m%n";
 	private static String FILE_LOG_LAYOUT_PREFIX = "[%d{MMM/dd HH:mm:ss}] ";
 	private static final String INSTALL_ROOT = Application.environment().getInstallRoot();
@@ -52,10 +46,8 @@ public class MondoSamTest {
 	private static final String WARMUP_PROJECT_PATH = INSTALL_ROOT + "performance" + File.separator + "inputs" + File.separator + WARMUP_MODEL;
 
 	private static final String RESULT_PATH = "." + File.separator + "results" + File.separator;
-	private static final String LOG_PATH = "." + File.separator + "logs" + File.separator;
 	private static final String WARMUP_RESULT_PATH = "." + File.separator + "results" + File.separator + "warmup" + File.separator;
 
-	@BeforeClass
 	public static void firstInit() throws Exception {
 		new File(RESULT_PATH).mkdirs();
 		// Opening project for the first time
@@ -74,7 +66,6 @@ public class MondoSamTest {
 		System.out.println("Project opened.");
 	}
 
-	@Test
 	public void runPerformanceMeasurement() throws Exception {
 	    int size = getModelSize();
 	    int runIndex = getRunIndex();
@@ -84,21 +75,12 @@ public class MondoSamTest {
 	
 	protected void runMeasurementOnModel(String modelPath, String resultPath, int size, int runIndex) throws Exception {
 		
-    	String engine = getEngine();
+        	String engine = getEngine();
 		if("RETE".equals(engine)) {
-			
-			List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
-	        if (specs.isEmpty()) {
-	            return;
-	        }
 		    openProject(modelPath+".mdzip");
 		    reteIndividually(resultPath, size, runIndex);
 		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("LOCAL_SEARCH".equals(engine)) {
-		    List<IQuerySpecification<?>> specs = sort(getLSQuerySpecifications());
-	        if (specs.isEmpty()) {
-	            return;
-	        }
 		    openProject(modelPath+".mdzip");
 		    localSearchIndividually(resultPath, size, runIndex);
 		    Application.getInstance().getProjectsManager().closeProjectNoSave();
@@ -117,13 +99,11 @@ public class MondoSamTest {
 		    parentStatesHint(resultPath, size, runIndex);
 		    Application.getInstance().getProjectsManager().closeProjectNoSave();
 		} else if ("HYBRID".equals(engine)) {
-		    List<IQuerySpecification<?>> specs = sort(getHybridQuerySpecifications());
-		    if (specs.isEmpty()) {
-		        return;
-		    }
 		    openProject(modelPath+".mdzip");
 		    hybridIndividually(resultPath, size, runIndex);
 		    Application.getInstance().getProjectsManager().closeProjectNoSave();
+		} else {
+			System.out.println("Unknown engine" + engine);
 		}
 
 	}
@@ -167,55 +147,48 @@ public class MondoSamTest {
     }
 
 	private void localSearchIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-	    List<IQuerySpecification<?>> specs = sort(getLSQuerySpecifications());
-	    for (IQuerySpecification<?> querySpecification : specs) {
-			String path = resultPath+getName(querySpecification)+File.separator;
-			new File(path).mkdirs();
+	    IQuerySpecification<?> querySpecification = findQueryByName(getLSQuerySpecifications(), getQuery());
+		String path = resultPath+getName(querySpecification)+File.separator;
+		new File(path).mkdirs();
 
-			BenchmarkEngine engine = initBenchmark(path);
+		BenchmarkEngine engine = initBenchmark(path);
 
-			MyDataToken token = new MyDataToken();
-			MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
-					Collections.singletonList(querySpecification), EngineImpl.LOCAL_SEARCH, Collections.emptyList(), true, runIndex);
-			scenario.setSize(size);
-			engine.runBenchmark(scenario, token);
-		}
+		MyDataToken token = new MyDataToken();
+		MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
+				Collections.singletonList(querySpecification), EngineImpl.LOCAL_SEARCH, Collections.emptyList(), true, runIndex);
+		scenario.setSize(size);
+		engine.runBenchmark(scenario, token);
 	}
 
 	private void reteIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-	    List<IQuerySpecification<?>> specs = sort(getReteQuerySpecifications());
-        for (IQuerySpecification<?> querySpecification : specs) {
+	    IQuerySpecification<?> querySpecification = findQueryByName(getReteQuerySpecifications(), getQuery());
 			
-			String path = resultPath+getName(querySpecification)+File.separator;
-			new File(path).mkdirs();
+		String path = resultPath+getName(querySpecification)+File.separator;
+		new File(path).mkdirs();
 
-			BenchmarkEngine engine = initBenchmark(path);
+		BenchmarkEngine engine = initBenchmark(path);
 
-			MyDataToken token = new MyDataToken();
-			MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
-					Collections.singletonList(querySpecification), EngineImpl.RETE, Collections.emptyList(), false, runIndex);
-			scenario.setSize(size);
-			engine.runBenchmark(scenario, token);
-			
-		}
+		MyDataToken token = new MyDataToken();
+		MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
+				Collections.singletonList(querySpecification), EngineImpl.RETE, Collections.emptyList(), false, runIndex);
+		scenario.setSize(size);
+		engine.runBenchmark(scenario, token);
 	}
 
 	private void hybridIndividually(String resultPath, Integer size, int runIndex) throws Exception {
-	    List<IQuerySpecification<?>> specs = sort(getHybridQuerySpecifications());
-        for (IQuerySpecification<?> querySpecification : specs) {
+        IQuerySpecification<?> querySpecification = findQueryByName(getHybridQuerySpecifications(), getQuery()); 
 			
-			String path = resultPath+getName(querySpecification)+File.separator;
-			new File(path).mkdirs();
+		String path = resultPath+getName(querySpecification)+File.separator;
+		new File(path).mkdirs();
 
-			BenchmarkEngine engine = initBenchmark(path);
+		BenchmarkEngine engine = initBenchmark(path);
 
-			MyDataToken token = new MyDataToken();
-			MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
-					Collections.singletonList(querySpecification), EngineImpl.LOCAL_SEARCH, Collections.emptyList(), true, runIndex);
-			scenario.setSize(size);
-			engine.runBenchmark(scenario, token);
-			
-		}
+		MyDataToken token = new MyDataToken();
+		MultipleQueriesScenario scenario = new MultipleQueriesScenario(getName(querySpecification),
+				Collections.singletonList(querySpecification), EngineImpl.LOCAL_SEARCH, Collections.emptyList(), true, runIndex);
+		scenario.setSize(size);
+		engine.runBenchmark(scenario, token);
+		
 	}
 
 
@@ -269,7 +242,7 @@ public class MondoSamTest {
 	 */
 	private static void warmUpJvm(String warmUpProjectPath) throws Exception {
 		// Executing the exact same phases with a trivial sized model (to avoid class loading as much as possible)
-		MondoSamTest mondoSamTest = new MondoSamTest();
+		MondoSamRunner mondoSamTest = new MondoSamRunner();
 		mondoSamTest.runMeasurementOnModel(warmUpProjectPath, WARMUP_RESULT_PATH, 5000, 1);
 	}
 
@@ -285,10 +258,9 @@ public class MondoSamTest {
         return IncrementalQueries.instance().getSpecifications();
     }
 	
-	private List<IQuerySpecification<?>> sort(Collection<IQuerySpecification<?>> querySpecifications) throws ViatraQueryException {
-		String query = getQuery();
-		return querySpecifications.stream().sorted((a, b) -> a.getFullyQualifiedName().compareTo(b.getFullyQualifiedName()))
-		        .filter(spec -> getName(spec).equals(query)).collect(Collectors.toList());
+	private IQuerySpecification<?> findQueryByName(Collection<IQuerySpecification<?>> querySpecifications, String queryName) throws ViatraQueryException {
+		return querySpecifications.stream().filter(spec -> Objects.deepEquals(getName(spec), queryName)).findAny()
+				.orElseThrow(() -> new IllegalArgumentException("Query " + queryName + " not found "));
 	}
 
 	/**
@@ -299,10 +271,10 @@ public class MondoSamTest {
 	}
 	
 	private static void initLogger() throws IOException {	
-		Logger logger = Logger.getLogger("com.incquerylabs.magicdraw.benchmark");
+		Logger logger = Logger.getLogger("org.eclipse.viatra.query");
 		logger.setLevel(Level.INFO);
 		
-		String logFilePath = LOG_PATH+"benchmark_"+System.currentTimeMillis()+".log";
+		String logFilePath = RESULT_PATH+"log/benchmark.log";
 		FileAppender fileAppender = new FileAppender(new PatternLayout(FILE_LOG_LAYOUT_PREFIX+COMMON_LAYOUT),logFilePath,true);
 		logger.addAppender(fileAppender);
 	}

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.pde.ui.EquinoxLauncher">
-<setAttribute key="additional_plugins"/>
+<setAttribute key="additional_plugins">
+<setEntry value="com.google.guava:18.0.0:default:true"/>
+<setEntry value="eu.mondo.sam.bundle:0.1.0.qualifier:default:true"/>
+</setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="automaticAdd" value="false"/>
 <booleanAttribute key="automaticValidate" value="false"/>
 <stringAttribute key="bootstrap" value=""/>
 <stringAttribute key="checked" value="[NONE]"/>
 <booleanAttribute key="clearConfig" value="false"/>
-<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/MagicDraw with all plugins"/>
+<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Run Benchmark"/>
 <booleanAttribute key="default" value="false"/>
 <booleanAttribute key="default_auto_start" value="false"/>
 <intAttribute key="default_start_level" value="4"/>
@@ -20,7 +23,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-consoleLog -application com.nomagic.magicdraw.application -verbose"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx8000M&#13;&#10;-Xss1024K&#13;&#10;-Dosgi.framework.extensions=reference:${file_uri:${workspace_loc:/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles}}/com.nomagic.magicdraw.osgi.fragment&#13;&#13;&#10;-Dosgi.bundlefile.limit=500&#13;&#10;-DLOCALCONFIG=true&#13;&#10;-Dmd.class.path=&quot;${project_classpath:MagicDraw with all plugins}&quot;&#13;&#10;-Dcom.nomagic.osgi.config.dir=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/configuration&quot;&#13;&#10;-Desi.system.config=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/data/application.conf&quot;&#13;&#10;-Dlogback.configurationFile=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/data/logback.xml&quot;&#13;&#10;-Dinstall.root=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}&quot;&#13;&#10;-Dmd.plugins.dir=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/plugins;${project_loc:com.incquerylabs.instaschema.performance}/..”"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx8000M&#13;&#10;-Xss1024K&#13;&#10;-Dosgi.framework.extensions=reference:${file_uri:${workspace_loc:/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles}}/com.nomagic.magicdraw.osgi.fragment&#13;&#10;-Dosgi.bundlefile.limit=500&#13;&#10;-DLOCALCONFIG=true&#13;&#10;-Dmd.class.path=&quot;${project_classpath:MagicDraw with all plugins}&quot;&#13;&#10;-Dcom.nomagic.osgi.config.dir=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/configuration&quot;&#13;&#10;-Desi.system.config=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/data/application.conf&quot;&#13;&#10;-Dlogback.configurationFile=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/data/logback.xml&quot;&#13;&#10;-Dinstall.root=&quot;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}&quot;&#10;-Dmd.plugins.dir=&quot;${project_loc:/com.incquerylabs.instaschema.performance}/..;${resource_loc:MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY}/plugins&quot;&#10;-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher&#10;-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.instaschema.performance.benchmark.PerformanceBenchmarkRunner&#10;-Dcom.incquerylabs.magicdraw.benchmark.engine=LOCAL_SEARCH&#10;-Dcom.incquerylabs.magicdraw.benchmark.query=allBenchMarkedQueries&#10;-Dcom.incquerylabs.magicdraw.benchmark.size=300000&#10;-Dcom.incquerylabs.magicdraw.benchmark.runIndex=1"/>
 <stringAttribute key="pde.version" value="3.3"/>
 <setAttribute key="selected_features">
 <setEntry value="com.nomagic.magicdraw.platform.feature:default"/>

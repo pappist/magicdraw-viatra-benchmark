@@ -6,10 +6,10 @@ Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.viatra.query.runtime,
  org.eclipse.viatra.transformation.runtime.emf,
  org.eclipse.xtext.xbase.lib;bundle-version="2.9.2",
+ com.google.guava;bundle-version="[15.0.0,16.0.0)",
  com.nomagic.magicdraw;bundle-version="17.0.5",
  com.nomagic.magicdraw.uml2;bundle-version="2.5.0",
  org.eclipse.viatra.transformation.evm,
- com.google.guava;bundle-version="[15.0.0,16.0.0)",
  org.eclipse.viatra.query.runtime.base.itc,
  org.eclipse.viatra.query.runtime.base,
  org.eclipse.viatra.query.runtime.localsearch,
@@ -19,6 +19,8 @@ Require-Bundle: org.eclipse.viatra.query.runtime,
  org.eclipse.viatra.query.runtime,
  org.eclipse.viatra.transformation.evm,
  org.eclipse.viatra.transformation.runtime.emf,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ eu.mondo.sam.bundle;bundle-version="0.1.0",
+ com.incquerylabs.instaschema.performance;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

@@ -32,10 +32,4 @@
 			<locationURI>MD_HOME</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>MD_HOME</name>
-			<value>file:/F:/git/mdk/build/dependency-cache/extracted</value>
-		</variable>
-	</variableList>
 </projectDescription>

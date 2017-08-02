@@ -31,6 +31,12 @@
 				<configuration>
 					<filesets>
 						<fileset>
+							<directory>results</directory>
+							<excludes>
+								<exclude>.gitignore</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
 							<directory>src-gen</directory>
 							<excludes>
 								<exclude>.gitignore</exclude>
@@ -250,7 +256,6 @@
 									<overWrite>true</overWrite>
 									<outputDirectory>${release.lib.dir}</outputDirectory>
 								</artifactItem>								
-								
 							</artifactItems>
 						</configuration>
 					</execution>
@@ -276,6 +281,27 @@
 						<goals>
 							<goal>run</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>exec-maven-plugin</artifactId>
+				<groupId>org.codehaus.mojo</groupId>
+				<version>1.6.0</version>
+				<executions>
+					<execution><!-- Run our version calculation script -->
+						<id>MagicDraw Test Execution</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>${basedir}/run.sh</executable>
+							<successCodes>
+								<successCode>0</successCode>
+								<successCode>1</successCode>
+							</successCodes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

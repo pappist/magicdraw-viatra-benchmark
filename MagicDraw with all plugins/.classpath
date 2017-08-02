@@ -2,10 +2,5 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MagicDraw"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.incquerylabs.instaschema.performance"/>
-	<classpathentry kind="lib" path="/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/plugins/com.nomagic.magicdraw.diagramtable/lib/commons-lang3-3.4.jar"/>
-	<classpathentry kind="lib" path="/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/plugins/com.nomagic.magicdraw.diagramtable/diagramtable_api.jar"/>
-	<classpathentry kind="lib" path="/MagicDraw/MAGIC_DRAW_INSTALL_DIRECTORY/plugins/com.nomagic.magicdraw.diagramtable/diagramtable.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

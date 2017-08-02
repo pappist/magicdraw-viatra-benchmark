@@ -2,11 +2,18 @@
 <plugin 
 	class="com.incquerylabs.instaschema.performance.InstaSchemaPerformancePlugin" 
 	class-lookup="GlobalFirst" 
-	id="com.incquerylabs.instaschema" 
+	id="com.incquerylabs.instaschema.performance" 
 	name="VIATRA Query Benchmark Performance" 
 	provider-name="IncQuery Labs ltd." 
 	version="1.0"
 	internalVersion="100010">
+
+	<requires>
+		<api version="1.0"/>
+	    
+		<required-plugin id="com.nomagic.magicdraw.plugins.impl.sysml" />
+
+	</requires>
 
   <runtime>
     <library name="lib/guava.jar"/>

@@ -23,7 +23,7 @@
 
 	<modules>
 		<module>com.incquerylabs.benchmark.performance</module>
-		<module>com.incquerylabs.benchmark.test</module>
+		
 		<module>com.incquerylabs.benchmark.generator</module>
 	</modules>
 

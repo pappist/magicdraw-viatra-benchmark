@@ -51,6 +51,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 import com.google.common.base.Stopwatch;
+import com.incquerylabs.instaschema.performance.benchmark.PerformanceBenchmarkRunner;
 import com.incquerylabs.instaschema.performance.incrementalqueries.IncrementalQueries;
 import com.incquerylabs.instaschema.performance.queries.APerformanceQueries;
 import com.incquerylabs.instaschema.performance.queries.WarmUpQueries;
@@ -60,6 +61,7 @@ import com.nomagic.actions.ActionsManager;
 import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;
 import com.nomagic.magicdraw.actions.MDAction;
 import com.nomagic.magicdraw.actions.MDActionsCategory;
+import com.nomagic.magicdraw.commandline.CommandLineActionManager;
 import com.nomagic.magicdraw.core.Application;
 
 public class InstaSchemaPerformancePlugin extends com.nomagic.magicdraw.plugins.Plugin {
@@ -69,6 +71,7 @@ public class InstaSchemaPerformancePlugin extends com.nomagic.magicdraw.plugins.
 	@Override
 	public void init() {
 		initializeActions();
+		CommandLineActionManager.getInstance().addAction(new PerformanceBenchmarkRunner());
 		initialized = true; 
 	}
 
