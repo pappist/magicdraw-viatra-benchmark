@@ -80,5 +80,12 @@ You can either set this in environment variables before running the benchmark or
 <!-- end of Getting started (only edit outside of section, please) -->
 
 ## Repository structure
+* [Benchmark plugin](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/com.incquerylabs.benchmark.performance)
+  * [Benchmark queries](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/com.incquerylabs.benchmark.performance/src/com/incquerylabs/instaschema/performance/queries) 
+  * [Benchmark plugin entry point](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/blob/master/com.incquerylabs.benchmark.performance/src/com/incquerylabs/instaschema/performance/InstaSchemaPerformancePlugin.java)
+* [Benchmark execution](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/com.incquerylabs.benchmark.test)
+  * [Benchmark execution script](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/blob/master/com.incquerylabs.benchmark.test/run.sh)
+* [Report generation](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/benchmark)
+* [MagicDraw target platform definition](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/MagicDraw)
+* [Mondo-SAM benchmarking framework bundle](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/eu.mondo.sam.bundle)
 
-TODO @lunkpeter
