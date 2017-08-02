@@ -89,3 +89,4 @@ You can either set this in environment variables before running the benchmark or
 * [MagicDraw target platform definition](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/MagicDraw)
 * [Mondo-SAM benchmarking framework bundle](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/tree/master/eu.mondo.sam.bundle)
 
+## [Benchmark details and results wiki page](https://github.com/IncQueryLabs/magicdraw-viatra-benchmark/wiki/MagicDraw-VIATRA-benchmark-results)
