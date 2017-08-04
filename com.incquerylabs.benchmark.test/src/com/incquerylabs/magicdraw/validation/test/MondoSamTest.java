@@ -62,7 +62,7 @@ public class MondoSamTest {
 		System.out.println("Warming up...");
 		warmUpJvm(WARMUP_PROJECT_PATH);
 		System.out.println("Real measurement starting...");
-//		initLogger();
+		initLogger();
 
 	}
 
