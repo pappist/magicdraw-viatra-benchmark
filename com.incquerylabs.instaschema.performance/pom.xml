@@ -112,7 +112,7 @@
 				<executions>
 					<execution>
 						<id>copy</id>
-						<phase>install</phase>
+						<phase>verify</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -265,7 +265,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>install</phase>
+						<phase>verify</phase>
 						<configuration>
 							<tasks>
 								<copy

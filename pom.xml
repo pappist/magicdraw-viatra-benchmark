@@ -22,7 +22,7 @@
 	</properties>
 
 	<modules>
-		<module>com.incquerylabs.benchmark.performance</module>
+		<module>com.incquerylabs.instaschema.performance</module>
 		
 		<module>com.incquerylabs.benchmark.generator</module>
 	</modules>

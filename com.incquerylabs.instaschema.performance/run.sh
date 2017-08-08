@@ -31,7 +31,7 @@ CP="${OSGI_LAUNCHER}${cp_delim}${OSGI_FRAMEWORK}${cp_delim}${MD_OSGI_FRAGMENT}${
 # Setup benchmark
 if [ -z "$BENCHMARK_ENGINES" ]; then
 #BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS-CONDITION_FIRST, LOCAL_SEARCH_HINTS-TC_FIRST, HYBRID"
-BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, LOCAL_SEARCH_HINTS-CONDITION_FIRST, LOCAL_SEARCH_HINTS-TC_FIRST, HYBRID"
+BENCHMARK_ENGINES="RETE, LOCAL_SEARCH, HYBRID"
 fi
 echo "Selected engines: ${BENCHMARK_ENGINES}"
 
@@ -51,6 +51,12 @@ if [ -z "$BENCHMARK_RUNS" ]; then
 BENCHMARK_RUNS=1
 fi
 echo "Number of runs: ${BENCHMARK_RUNS}"
+
+if [ -z $WORKSPACE ]; then 
+    OUTPUT_DIR="results"
+else 
+    OUTPUT_DIR="$WORKSPACE/com.incquerylabs.instaschema.performance/results"
+fi
 
 IFS=', ' read -r -a engines <<< "$BENCHMARK_ENGINES"
 IFS=', ' read -r -a queries <<< "$BENCHMARK_QUERIES"
@@ -81,12 +87,8 @@ do
 					-Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
 					-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
 					-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.instaschema.performance.benchmark.PerformanceBenchmarkRunner \
-					-Dcom.incquerylabs.magicdraw.benchmark.engine=$engine \
-					-Dcom.incquerylabs.magicdraw.benchmark.query=$query \
-					-Dcom.incquerylabs.magicdraw.benchmark.size=$size \
-					-Dcom.incquerylabs.magicdraw.benchmark.runIndex=$runIndex \
 					-cp "$CP" \
-					com.nomagic.osgi.launcher.ProductionFrameworkLauncher "$@"
+					com.nomagic.osgi.launcher.ProductionFrameworkLauncher "$@ -engine $engine -query $query -index $runIndex -size $size -model '${MD_HOME}/performance/inputs/TMT$size.mdzip' -warmup '${MD_HOME}/performance/inputs/Warmup.mdzip' -output '${OUTPUT_DIR}'"
 			done
 		done
 	done

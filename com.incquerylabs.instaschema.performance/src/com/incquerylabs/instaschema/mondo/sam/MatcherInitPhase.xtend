@@ -40,7 +40,7 @@ class MatcherInitPhase extends AtomicPhase {
 	}
 	
 	override execute(DataToken token, PhaseResult phaseResult) {
-		val dataToken = token as MyDataToken
+		val dataToken = token as QueryMatcherToken
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
 		val prememory = new MemoryMetric("PreMemory")
