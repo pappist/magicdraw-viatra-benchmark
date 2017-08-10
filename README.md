@@ -16,7 +16,7 @@ export WORKSPACE=c:/git/magicdraw-viatra-benchmark
 
 You need to put the set of instance models (`mdzip` files) that the benchmark runs on in a `benchmarking` folder inside the MagicDraw installation folder (`MD_HOME`).
 
-You can download the models from this link: TODO
+You can download the models from this link: http://static.incquerylabs.com/projects/magicdraw/benchmark/models/models-tmt.zip
 
 ### Running the benchmark
 
