@@ -25,7 +25,7 @@
 			<artifactId>com.nomagic.ci.binary_17.0.5</artifactId>
 			<version>17.0.5</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.binary_17.0.5.v20161006-1841.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.binary_17.0.5.v20170426-1207.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -33,7 +33,7 @@
 			<artifactId>com.nomagic.ci.services_17.0.5</artifactId>
 			<version>17.0.5</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.services_17.0.5.v20161006-1841.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.ci.services_17.0.5.v20170426-1207.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -41,7 +41,7 @@
 			<artifactId>magicdraw.uml2</artifactId>
 			<version>2.5.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201704261213.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -49,7 +49,7 @@
 			<artifactId>magicdraw.diagram</artifactId>
 			<version>18.1.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core.diagram_18.1.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core.diagram_18.1.0.201704261213.jar</systemPath>
 		</dependency>
 		
 		<dependency>
@@ -57,15 +57,16 @@
 			<artifactId>magicdraw.foundation</artifactId>
 			<version>2.0.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.foundation_2.0.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.foundation_2.0.0.201704261213.jar</systemPath>
 		</dependency>
 		
-				<dependency>
+		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>jmi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/javax.jmi_1.0.0.201610061849/javax_jmi-1_0-fr.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/javax.jmi_1.0.0.201704261213/javax_jmi-1_0-fr.jar</systemPath>
 		</dependency>
+		
 	</dependencies>
 </project>

@@ -325,7 +325,7 @@
 	<!-- </pluginRepositories> -->
 
 	<dependencies>
-		<dependency>
+			<dependency>
 			<groupId>eu.mondo.sam</groupId>
 			<artifactId>eu.mondo.sam.core</artifactId>
 			<version>${mondo.sam.version}</version>
@@ -363,12 +363,14 @@
 			<artifactId>org.eclipse.xtend.lib</artifactId>
 			<version>${xtend.version}</version>
 		</dependency>
+		<!-- MagicDraw 18.5 -->
+		
 		<dependency>
 			<groupId>com.nomagic</groupId>
 			<artifactId>magicdraw.uml2</artifactId>
 			<version>2.5.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.uml2_2.5.0.201704261213.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -400,7 +402,7 @@
 			<artifactId>magicdraw.foundation</artifactId>
 			<version>2.0.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.foundation_2.0.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.foundation_2.0.0.201704261213.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -408,7 +410,7 @@
 			<artifactId>magicdraw.core</artifactId>
 			<version>1.0.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core_1.0.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core_1.0.0.201704261213.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -416,7 +418,7 @@
 			<artifactId>magicdraw.diagram</artifactId>
 			<version>18.1.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core.diagram_18.1.0.201610061849.jar</systemPath>
+			<systemPath>${md.home}/lib/bundles/com.nomagic.magicdraw.core.diagram_18.1.0.201704261213.jar</systemPath>
 		</dependency>
 
 		<dependency>
@@ -424,40 +426,12 @@
 			<artifactId>jmi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>${md.home}/lib/bundles/javax.jmi_1.0.0.201610061849/javax_jmi-1_0-fr.jar</systemPath>
-		</dependency>
-		
-				<!-- ********************************************************************** -->
-		<!-- Magicdraw SysML plugin jars which need to be on the classpath -->
-
-		<dependency>
-			<groupId>com.nomagic.magicdraw.diagramtable</groupId>
-			<artifactId>diagramtable_api</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${md.home}/plugins/com.nomagic.magicdraw.diagramtable/diagramtable_api.jar</systemPath>
-		</dependency>
-
-		<dependency>
-			<groupId>com.nomagic.magicdraw.diagramtable</groupId>
-			<artifactId>diagramtable</artifactId>
-			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${md.home}/plugins/com.nomagic.magicdraw.diagramtable/diagramtable.jar</systemPath>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.6.0</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-core-asl</artifactId>
-		    <version>1.6.0</version>
+			<systemPath>${md.home}/lib/bundles/javax.jmi_1.0.0.201704261213/javax_jmi-1_0-fr.jar</systemPath>
 		</dependency>
 		
 	</dependencies>
+
+	
+	
 	<artifactId>com.incquerylabs.instaschema.performance</artifactId>
 </project>
