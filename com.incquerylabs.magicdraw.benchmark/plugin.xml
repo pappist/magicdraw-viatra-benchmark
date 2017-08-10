@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin 
-	class="com.incquerylabs.instaschema.performance.InstaSchemaPerformancePlugin" 
+	class="com.incquerylabs.magicdraw.benchmark.PerformanceBenchmarkRunner" 
 	class-lookup="GlobalFirst" 
-	id="com.incquerylabs.instaschema.performance" 
+	id="com.incquerylabs.magicdraw.benchmark" 
 	name="VIATRA Query Benchmark Performance" 
 	provider-name="IncQuery Labs ltd." 
 	version="1.0"

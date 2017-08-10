@@ -1,6 +1,6 @@
-package com.incquerylabs.instaschema.mondo.sam
+package com.incquerylabs.magicdraw.benchmark.mondo.sam
 
-import com.incquerylabs.instaschema.performance.EngineImpl
+import com.incquerylabs.magicdraw.benchmark.EngineImpl
 import eu.mondo.sam.core.phases.SequencePhase
 import eu.mondo.sam.core.results.CaseDescriptor
 import eu.mondo.sam.core.scenarios.BenchmarkScenario
@@ -51,7 +51,7 @@ class SingleQueryScenario extends BenchmarkScenario {
 			it.size = this.size
 			it.runIndex = this.runIndex
 			it.scenario = this.getName
-			it.tool = this.getToolName
+			it.tool = this.toolName
 		]
 		return descriptor
 	}

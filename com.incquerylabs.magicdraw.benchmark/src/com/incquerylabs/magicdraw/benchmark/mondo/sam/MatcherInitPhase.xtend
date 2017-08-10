@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.mondo.sam
+package com.incquerylabs.magicdraw.benchmark.mondo.sam
 
 import com.google.common.collect.ImmutableSet
 import eu.mondo.sam.core.DataToken

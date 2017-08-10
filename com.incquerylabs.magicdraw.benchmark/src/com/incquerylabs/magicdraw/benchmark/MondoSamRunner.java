@@ -1,11 +1,11 @@
-package com.incquerylabs.instaschema.performance.benchmark;
+package com.incquerylabs.magicdraw.benchmark;
 
 import java.io.File;
 
 import org.eclipse.viatra.query.runtime.api.IQuerySpecification;
 
-import com.incquerylabs.instaschema.mondo.sam.QueryMatcherToken;
-import com.incquerylabs.instaschema.mondo.sam.SingleQueryScenario;
+import com.incquerylabs.magicdraw.benchmark.mondo.sam.QueryMatcherToken;
+import com.incquerylabs.magicdraw.benchmark.mondo.sam.SingleQueryScenario;
 import com.nomagic.magicdraw.core.Application;
 import com.nomagic.magicdraw.core.project.ProjectDescriptor;
 import com.nomagic.magicdraw.core.project.ProjectDescriptorsFactory;

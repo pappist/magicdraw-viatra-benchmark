@@ -35,7 +35,7 @@ pipeline {
     
     post {
     	always {
-    		archiveArtifacts 'com.incquerylabs.instaschema.performance/results/**, benchmark/**'
+    		archiveArtifacts 'com.incquerylabs.magicdraw.benchmark/results/**, benchmark/**'
     	}
         success {
             slackSend channel: "magicdraw-notificatio", 

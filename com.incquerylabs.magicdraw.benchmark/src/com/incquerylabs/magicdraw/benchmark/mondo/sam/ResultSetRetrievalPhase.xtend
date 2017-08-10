@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.mondo.sam
+package com.incquerylabs.magicdraw.benchmark.mondo.sam
 
 import eu.mondo.sam.core.DataToken
 import eu.mondo.sam.core.metrics.ScalarMetric
@@ -17,17 +17,17 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 	}
 	
 	override execute(DataToken token, PhaseResult phaseResult) {
-		val logger = Logger.getLogger("org.eclipse.viatra.query");
+		val logger = Logger.getLogger("com.incquerylabs.magicdraw.benchmark");
 		val myToken = token as QueryMatcherToken
 
 		// Time and memory are measured
 		val timer = new TimeMetric("Time")
 		
-//		val queryBackend = myToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
-//		val profiler = new LocalSearchProfilerAdapter()
-//		if(queryBackend instanceof LocalSearchBackend){
-//			queryBackend.addAdapter(profiler)	
-//		}
+		val queryBackend = myToken.engine.getQueryBackend(LocalSearchBackendFactory.INSTANCE)
+		val profiler = new LocalSearchProfilerAdapter()
+		if(queryBackend instanceof LocalSearchBackend){
+			queryBackend.addAdapter(profiler)	
+		}
 		
 		
 		timer.startMeasure
@@ -41,9 +41,9 @@ class ResultSetRetrievalPhase extends AtomicPhase {
 		
 		phaseResult.addMetrics(timer, matchSetSize)
 		
-//		if(queryBackend instanceof LocalSearchBackend){
-//			logger.info(profiler)
-//		}		
+		if(queryBackend instanceof LocalSearchBackend){
+			logger.info(profiler)
+} 		
 	}	
 	
 }

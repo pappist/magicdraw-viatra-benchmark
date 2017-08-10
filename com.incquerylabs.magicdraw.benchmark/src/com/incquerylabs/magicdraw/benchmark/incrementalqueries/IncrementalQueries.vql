@@ -1,9 +1,9 @@
-package com.incquerylabs.instaschema.performance.incrementalqueries
+package com.incquerylabs.magicdraw.benchmark.incrementalqueries
 
 import "http://www.nomagic.com/magicdraw/UML/2.5.0"
-import com.incquerylabs.instaschema.performance.queries.statesWithShortNames
-import com.incquerylabs.instaschema.performance.queries.incomingTransitions
-import com.incquerylabs.instaschema.performance.queries.statesWithMoreIncomingTransitions
+import com.incquerylabs.magicdraw.benchmark.queries.statesWithShortNames
+import com.incquerylabs.magicdraw.benchmark.queries.incomingTransitions
+import com.incquerylabs.magicdraw.benchmark.queries.statesWithMoreIncomingTransitions
 
 /**
  * Simple pattern for transitive closures marked incremental.

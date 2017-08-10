@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.performance.benchmark;
+package com.incquerylabs.magicdraw.benchmark;
 
 import java.io.File;
 import java.io.IOException;

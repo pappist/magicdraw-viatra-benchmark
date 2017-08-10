@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.performance;
+package com.incquerylabs.magicdraw.benchmark;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -51,11 +51,10 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
 
 import com.google.common.base.Stopwatch;
-import com.incquerylabs.instaschema.performance.benchmark.PerformanceBenchmarkRunner;
-import com.incquerylabs.instaschema.performance.incrementalqueries.IncrementalQueries;
-import com.incquerylabs.instaschema.performance.queries.APerformanceQueries;
-import com.incquerylabs.instaschema.performance.queries.WarmUpQueries;
-import com.incquerylabs.instaschema.performance.queries.util.TransitiveSubstatesWithCheck3QuerySpecification;
+import com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries;
+import com.incquerylabs.magicdraw.benchmark.queries.APerformanceQueries;
+import com.incquerylabs.magicdraw.benchmark.queries.WarmUpQueries;
+import com.incquerylabs.magicdraw.benchmark.queries.util.TransitiveSubstatesWithCheck3QuerySpecification;
 import com.nomagic.actions.AMConfigurator;
 import com.nomagic.actions.ActionsManager;
 import com.nomagic.magicdraw.actions.ActionsConfiguratorsManager;

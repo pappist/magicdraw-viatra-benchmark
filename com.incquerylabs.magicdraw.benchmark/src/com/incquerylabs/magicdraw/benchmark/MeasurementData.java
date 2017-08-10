@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.performance;
+package com.incquerylabs.magicdraw.benchmark;
 
 import java.util.ArrayList;
 import java.util.List;

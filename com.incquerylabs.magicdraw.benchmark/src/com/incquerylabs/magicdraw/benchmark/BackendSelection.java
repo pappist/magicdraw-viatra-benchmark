@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.performance.benchmark;
+package com.incquerylabs.magicdraw.benchmark;
 
 import java.util.Objects;
 
@@ -13,12 +13,11 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.IQueryReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery;
 
-import com.incquerylabs.instaschema.performance.EngineImpl;
-import com.incquerylabs.instaschema.performance.incrementalqueries.IncrementalQueries;
-import com.incquerylabs.instaschema.performance.incrementalqueries.util.ParentStateQuerySpecification;
-import com.incquerylabs.instaschema.performance.queries.APerformanceQueries;
-import com.incquerylabs.instaschema.performance.queries.util.IncomingTransitionsQuerySpecification;
-import com.incquerylabs.instaschema.performance.queries.util.TransitiveSubstatesWithCheck3QuerySpecification;
+import com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries;
+import com.incquerylabs.magicdraw.benchmark.incrementalqueries.util.ParentStateQuerySpecification;
+import com.incquerylabs.magicdraw.benchmark.queries.APerformanceQueries;
+import com.incquerylabs.magicdraw.benchmark.queries.util.IncomingTransitionsQuerySpecification;
+import com.incquerylabs.magicdraw.benchmark.queries.util.TransitiveSubstatesWithCheck3QuerySpecification;
 
 public enum BackendSelection {
 

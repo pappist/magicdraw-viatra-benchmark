@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.performance.queries
+package com.incquerylabs.magicdraw.benchmark.queries
 
 import "http://www.nomagic.com/magicdraw/UML/2.5.0"
 

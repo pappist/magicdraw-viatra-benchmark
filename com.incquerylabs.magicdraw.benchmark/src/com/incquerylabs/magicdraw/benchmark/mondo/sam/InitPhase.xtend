@@ -1,4 +1,4 @@
-package com.incquerylabs.instaschema.mondo.sam
+package com.incquerylabs.magicdraw.benchmark.mondo.sam
 
 import eu.mondo.sam.core.DataToken
 import eu.mondo.sam.core.phases.AtomicPhase

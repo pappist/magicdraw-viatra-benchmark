@@ -10,7 +10,6 @@
 
 
 	<groupId>com.incquerylabs.magicdraw</groupId>
-	<artifactId>benchmark.performance</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -460,4 +459,5 @@
 		</dependency>
 		
 	</dependencies>
+	<artifactId>com.incquerylabs.instaschema.performance</artifactId>
 </project>
