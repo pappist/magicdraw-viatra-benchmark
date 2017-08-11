@@ -43,7 +43,7 @@ public class MondoSamRunner {
 	    		throw new IllegalArgumentException("Invalid parameter configuration");
 	    }
 	    openProject(modelPath);
-	    runBenchmark(BackendSelection.RETE, resultPath, size, runIndex);
+	    runBenchmark(queryBackend, resultPath, size, runIndex);
 	    Application.getInstance().getProjectsManager().closeProjectNoSave();
 	}
 
