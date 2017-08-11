@@ -10,6 +10,7 @@
 
 
 	<groupId>com.incquerylabs.magicdraw</groupId>
+	<artifactId>benchmark</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -111,7 +112,7 @@
 				<executions>
 					<execution>
 						<id>copy</id>
-						<phase>verify</phase>
+						<phase>install</phase>
 						<goals>
 							<goal>copy</goal>
 						</goals>
@@ -264,7 +265,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>verify</phase>
+						<phase>install</phase>
 						<configuration>
 							<tasks>
 								<copy
@@ -280,27 +281,6 @@
 						<goals>
 							<goal>run</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>exec-maven-plugin</artifactId>
-				<groupId>org.codehaus.mojo</groupId>
-				<version>1.6.0</version>
-				<executions>
-					<execution><!-- Run our version calculation script -->
-						<id>MagicDraw Test Execution</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${basedir}/run.sh</executable>
-							<successCodes>
-								<successCode>0</successCode>
-								<successCode>1</successCode>
-							</successCodes>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -431,7 +411,4 @@
 		
 	</dependencies>
 
-	
-	
-	<artifactId>com.incquerylabs.instaschema.performance</artifactId>
 </project>

@@ -63,7 +63,7 @@ import com.nomagic.magicdraw.actions.MDActionsCategory;
 import com.nomagic.magicdraw.commandline.CommandLineActionManager;
 import com.nomagic.magicdraw.core.Application;
 
-public class InstaSchemaPerformancePlugin extends com.nomagic.magicdraw.plugins.Plugin {
+public class MagicDrawPerformancePlugin extends com.nomagic.magicdraw.plugins.Plugin {
 
 	public static boolean initialized = false;	
 	

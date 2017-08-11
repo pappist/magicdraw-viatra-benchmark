@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin 
-	class="com.incquerylabs.magicdraw.benchmark.InstaSchemaPerformancePlugin" 
+	class="com.incquerylabs.magicdraw.benchmark.MagicDrawPerformancePlugin" 
 	class-lookup="GlobalFirst" 
 	id="com.incquerylabs.magicdraw.benchmark" 
 	name="VIATRA Query Benchmark Performance" 
@@ -33,6 +33,6 @@
     <library name="lib/jackson-core-asl.jar"/>
     <library name="lib/jackson-mapper-asl.jar"/>
     <library name="lib/eu.mondo.sam.core-0.1.0.jar"/>
-    <library name="benchmark.performance.jar"/>
+    <library name="benchmark.jar"/>
   </runtime>
 </plugin>

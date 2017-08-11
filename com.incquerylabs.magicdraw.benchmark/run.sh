@@ -84,7 +84,7 @@ do
 					-Dcom.nomagic.osgi.config.dir="$MD_HOME/configuration" \
 					-Desi.system.config="$MD_HOME/data/application.conf" \
 					-Dlogback.configurationFile="$MD_HOME/data/logback.xml" \
-					-Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}target/plugin-release/files/plugins${cp_delim}../com.incquerylabs.benchmark.performance/target/plugin-release/files/plugins" \
+					-Dmd.plugins.dir="$MD_HOME/plugins${cp_delim}$WORKSPACE/com.incquerylabs.magicdraw.benchmark/target/plugin-release/files/plugins${cp_delim}" \
 					-Dcom.nomagic.magicdraw.launcher=com.nomagic.magicdraw.commandline.CommandLineActionLauncher \
 					-Dcom.nomagic.magicdraw.commandline.action=com.incquerylabs.magicdraw.benchmark.PerformanceBenchmarkRunner \
 					-cp "$CP" \

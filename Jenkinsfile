@@ -17,12 +17,17 @@ pipeline {
     stages { 
         stage('Build') { 
             steps {
-            	wrap([$class: 'Xvnc']) {
-            		configFileProvider([configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
-    					sh 'mvn clean install -Dmd.home=$MD_HOME -s $MAVEN_SETTINGS'
-					}
+        		configFileProvider([configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
+					sh 'mvn clean install -Dmd.home=$MD_HOME -s $MAVEN_SETTINGS'
 				}
             }
+		}
+		stage('Benchmark') {
+            steps {
+            	wrap([$class: 'Xvnc']) {
+					sh './com.incquerylabs.magicdraw.benchmark/run.sh'
+            	}
+			}
 		}
 		stage('Report') {
 			steps {
