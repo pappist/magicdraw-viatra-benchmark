@@ -55,7 +55,7 @@ echo "Number of runs: ${BENCHMARK_RUNS}"
 if [ -z $WORKSPACE ]; then 
     OUTPUT_DIR="results"
 else 
-    OUTPUT_DIR="$WORKSPACE/com.incquerylabs.instaschema.performance/results"
+    OUTPUT_DIR="$WORKSPACE/com.incquerylabs.magicdraw.benchmark/results"
 fi
 
 IFS=', ' read -r -a engines <<< "$BENCHMARK_ENGINES"
