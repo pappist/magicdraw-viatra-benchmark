@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin 
-	class="com.incquerylabs.magicdraw.benchmark.PerformanceBenchmarkRunner" 
+	class="com.incquerylabs.magicdraw.benchmark.InstaSchemaPerformancePlugin" 
 	class-lookup="GlobalFirst" 
 	id="com.incquerylabs.magicdraw.benchmark" 
 	name="VIATRA Query Benchmark Performance" 
