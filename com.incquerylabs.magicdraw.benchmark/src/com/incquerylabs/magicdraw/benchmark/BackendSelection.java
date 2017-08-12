@@ -38,7 +38,7 @@ public enum BackendSelection {
 		case HYBRID:
 			return findQueryBySimpleName(IncrementalQueries.instance(), parameters.getQueryName());
 		default:
-			throw new IllegalStateException("Unexpected backend configuration " + this);
+			throw new InvalidBenchmarkParameterizationException("Unexpected backend configuration " + this);
 		}
 	}
 	
@@ -68,7 +68,7 @@ public enum BackendSelection {
 		case HYBRID:
 			return "Hybrid";
 		default:
-			throw new IllegalStateException("Unexpected backend configuration " + this);
+			throw new InvalidBenchmarkParameterizationException("Unexpected backend configuration " + this);
 		}
 	}
 	
@@ -115,7 +115,7 @@ public enum BackendSelection {
 	
 	private IQuerySpecification<?> findQueryBySimpleName(IQueryGroup querySpecifications, String queryName) throws ViatraQueryException {
 		return querySpecifications.getSpecifications().stream().filter(spec -> Objects.deepEquals(getName(spec), queryName)).findAny()
-				.orElseThrow(() -> new IllegalArgumentException("Query " + queryName + " not found "));
+				.orElseThrow(() -> new InvalidBenchmarkParameterizationException("Query " + queryName + " not found "));
 	}
 	
 	/**

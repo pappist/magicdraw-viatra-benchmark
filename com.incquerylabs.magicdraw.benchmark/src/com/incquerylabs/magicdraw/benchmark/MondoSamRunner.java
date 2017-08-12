@@ -40,7 +40,7 @@ public class MondoSamRunner {
 		String resultPath = parameters.getResultPath(isWarmup);
 	    BackendSelection queryBackend = parameters.getSelectedBackend();
 	    if (!queryBackend.canHandleParameters(parameters)) {
-	    		throw new IllegalArgumentException("Invalid parameter configuration");
+	    		throw new InvalidBenchmarkParameterizationException("Invalid parameter configuration");
 	    }
 	    openProject(modelPath);
 	    runBenchmark(queryBackend, resultPath, size, runIndex);

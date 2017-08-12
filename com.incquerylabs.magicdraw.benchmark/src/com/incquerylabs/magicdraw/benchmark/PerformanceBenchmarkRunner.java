@@ -2,7 +2,9 @@ package com.incquerylabs.magicdraw.benchmark;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import org.apache.log4j.FileAppender;
@@ -10,6 +12,8 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.nomagic.magicdraw.commandline.CommandLineAction;
 import com.nomagic.magicdraw.core.Application;
 
@@ -39,6 +43,10 @@ public class PerformanceBenchmarkRunner implements CommandLineAction{
 			
 			MondoSamRunner measurement = new MondoSamRunner(parameters);
 			measurement.runPerformanceMeasurement(false);
+		} catch (InvalidBenchmarkParameterizationException e) {
+			// In case of unsupported parameter definitions the benchmark will not emit results
+			e.printStackTrace();
+			return 0;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -49,9 +57,24 @@ public class PerformanceBenchmarkRunner implements CommandLineAction{
 	private BenchmarkParameters parseParameters(String[] args) {
 		BenchmarkParameters parameters = new BenchmarkParameters();
 		
-		// XXX Parameters are stored in a single args value separated by whitespace characters
-		String[] arguments = args[0].trim().split("\\s");
+		
+		
+		// XXX Sometimes parameters are stored in a single args value separated by whitespace characters
+		List<String[]> transformedArgs = Lists.transform(Arrays.asList(args), new Function<String, String[]>() {
 
+			@Override
+			public String[] apply(String arg0) {
+				return arg0.trim().split("\\s");
+			}
+			
+		});
+		List<String> argList = new ArrayList<>();
+		for (String[] strings : transformedArgs) {
+			argList.addAll(Arrays.asList(strings));
+		}
+		String[] arguments = argList.toArray(new String[argList.size()]);
+
+		
 		int argIndex = 0;
 		while(argIndex < arguments.length) {
 			if (Objects.equals("-engine", arguments[argIndex])) {
