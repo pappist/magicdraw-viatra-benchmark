@@ -7,7 +7,6 @@ pipeline {
     // Keep only the last 15 builds
 	options {
 		buildDiscarder(logRotator(numToKeepStr: '15'))
-		configFileProvider([configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')])
 	}
 	
 	tools { 
@@ -18,7 +17,9 @@ pipeline {
     stages { 
         stage('Build') { 
             steps {
-				sh 'mvn clean install -Dmd.home=$MD_HOME -s $MAVEN_SETTINGS'
+        		configFileProvider([configFile(fileId: 'org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig1377688925713', variable: 'MAVEN_SETTINGS')]) {
+					sh 'mvn clean install -Dmd.home=$MD_HOME -s $MAVEN_SETTINGS'
+				}
             }
 		}
 		stage('Benchmark') {
@@ -38,9 +39,9 @@ pipeline {
     }
     
     post {
-    		always {
-    			archiveArtifacts 'com.incquerylabs.magicdraw.benchmark/results/**, benchmark/**'
-    		}
+    	always {
+    		archiveArtifacts 'com.incquerylabs.magicdraw.benchmark/results/**, benchmark/**'
+    	}
         success {
             slackSend channel: "magicdraw-notificatio", 
     			color: "good",
