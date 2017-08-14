@@ -1,4 +1,6 @@
-# magicdraw-viatra-benchmark
+# The MagicDraw VIATRA Query performance benchmark
+
+This benchmark is intended to showcase the performance of the [VIATRA](http://eclipse.org/viatra) [Query](https://wiki.eclipse.org/VIATRA/Query) engine when run directly on MagicDraw SysML models, through the EMF interface.
 
 ## Getting Started
 
