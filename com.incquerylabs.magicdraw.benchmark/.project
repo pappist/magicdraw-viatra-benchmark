@@ -37,4 +37,17 @@
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.viatra.query.projectnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>MAGIC_DRAW_INSTALL_DIRECTORY</name>
+			<type>2</type>
+			<locationURI>MD_HOME</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>MD_HOME</name>
+			<value>$%7BPARENT-3-ECLIPSE_HOME%7D/magicdraw/install</value>
+		</variable>
+	</variableList>
 </projectDescription>

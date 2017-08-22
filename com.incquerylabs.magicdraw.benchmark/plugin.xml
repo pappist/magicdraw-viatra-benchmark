@@ -1,20 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<plugin 
-	class="com.incquerylabs.magicdraw.benchmark.MagicDrawPerformancePlugin" 
-	class-lookup="GlobalFirst" 
-	id="com.incquerylabs.magicdraw.benchmark" 
-	name="VIATRA Query Benchmark Performance" 
-	provider-name="IncQuery Labs ltd." 
-	version="1.0"
-	internalVersion="100010">
-
-	<requires>
-		<api version="1.0"/>
-	    
-		<required-plugin id="com.nomagic.magicdraw.plugins.impl.sysml" />
-
-	</requires>
-
+<?xml version="1.0" encoding="UTF-8"?><plugin class="com.incquerylabs.magicdraw.benchmark.MagicDrawPerformancePlugin" class-lookup="GlobalFirst" id="com.incquerylabs.magicdraw.benchmark" internalVersion="100010" name="VIATRA Query Benchmark Performance" provider-name="IncQuery Labs ltd." version="1.0">
+  <requires>
+    <api version="1.0"/>
+    <required-plugin id="com.nomagic.magicdraw.plugins.impl.sysml"/>
+  </requires>
   <runtime>
     <library name="lib/guava.jar"/>
     <library name="lib/log4j.jar"/>
@@ -35,4 +23,53 @@
     <library name="lib/eu.mondo.sam.core-0.1.0.jar"/>
     <library name="benchmark.jar"/>
   </runtime>
+  <extension id="com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries" id="com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries">
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.incrementalqueries.parentState"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.incrementalqueries.transitiveSubstatesWithCheck"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.incrementalqueries.transitiveSubstatesWithCheck2"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.incrementalqueries.transitiveSubstatesWithCheck3"/>
+    </group>
+  </extension>
+  <extension id="com.incquerylabs.magicdraw.benchmark.queries.APerformanceQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.benchmark.queries.APerformanceQueries" id="com.incquerylabs.magicdraw.benchmark.queries.APerformanceQueries">
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.classes"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.nonBlockClasses"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.blocks"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.requirements"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.blocksOrRequirements"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.blocksOrRequirementsOrConstraints"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.namedElement"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.complexNameOfElements"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.dependencyChains"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.circularDependencies"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.dependencies"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.namesOfDependencyEndpoints"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.alphabeticalDependencies"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.elementsWithShortNames"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.transitionPointingOutOfCompState"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.loopTransitionWithTriggerEffectEventNoGuard"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.parentState"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.subregions"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.numberOfSubregions"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.statesWithShortNames"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.incomingTransitions"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.transitiveSubstates"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.transitiveSubstatesWithCheck"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.statesWithMoreIncomingTransitions"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.transitiveSubstatesWithCheck2"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.transitiveSubstatesWithCheck3"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.numberOfTransitiveSubstates"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.stateWithMostSubstates"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.allBenchMarkedQueries"/>
+    </group>
+  </extension>
+  <extension id="com.incquerylabs.magicdraw.benchmark.queries.WarmUpQueries" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:com.incquerylabs.magicdraw.benchmark.queries.WarmUpQueries" id="com.incquerylabs.magicdraw.benchmark.queries.WarmUpQueries">
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.variables"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.associationClasses"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.activitites"/>
+      <query-specification fqn="com.incquerylabs.magicdraw.benchmark.queries.actorGeneralization"/>
+    </group>
+  </extension>
 </plugin>

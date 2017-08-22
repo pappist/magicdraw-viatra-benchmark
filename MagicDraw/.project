@@ -32,4 +32,10 @@
 			<locationURI>MD_HOME</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>MD_HOME</name>
+			<value>file:/E:/magicdraw/install</value>
+		</variable>
+	</variableList>
 </projectDescription>
