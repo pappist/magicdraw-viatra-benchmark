@@ -12,6 +12,7 @@ import org.eclipse.viatra.query.runtime.base.api.filters.IBaseIndexFeatureFilter
 import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint
 import com.nomagic.magicdraw.core.Application
+import org.eclipse.viatra.query.runtime.base.api.IndexingLevel
 
 /**
  * Contains an AdvancedViatraQueryEngine and a ViatraQueryMatcher.
@@ -36,7 +37,7 @@ class QueryMatcherToken implements DataToken {
 						}
 						return false;
 					}
-				}).withStrictNotificationMode(false);
+				}).withStrictNotificationMode(false).withWildcardLevel(IndexingLevel.FULL);
 				
 		if (engineDefaultHint !== null) {
 			val engineOptions = ViatraQueryEngineOptions.defineOptions().withDefaultHint(engineDefaultHint).build();

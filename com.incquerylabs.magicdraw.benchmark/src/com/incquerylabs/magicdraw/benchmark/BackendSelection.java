@@ -76,7 +76,7 @@ public enum BackendSelection {
 		switch (this) {
 		case LOCALSEARCH:
 		case HYBRID:
-			return LocalSearchHints.getDefault().build();
+			return LocalSearchHints.getDefault().setUseBase(true).build();
 		case LOCAL_SEARCH_HINTS_TC_FIRST:
 			return createMinimalCostCallHint(IncomingTransitionsQuerySpecification.instance());
 		case LOCAL_SEARCH_HINTS_CONDITION_FIRST:
