@@ -60,6 +60,5 @@
 	<classpathentry exported="true" kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/webservice/mdserviceclient.jar"/>
 	<classpathentry exported="true" kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/webservice/rsclient.jar"/>
 	<classpathentry exported="true" kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/webservice/wsdl4j-1.5.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="MAGIC_DRAW_INSTALL_DIRECTORY/lib/bundles/com.nomagic.magicdraw.core_1.0.0.201704261213.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

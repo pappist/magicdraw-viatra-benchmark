@@ -3,15 +3,15 @@
 <setAttribute key="additional_plugins">
 <setEntry value="com.google.guava:18.0.0:default:true"/>
 <setEntry value="eu.mondo.sam.bundle:0.1.0.qualifier:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.base.itc:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.base:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.localsearch:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.matchers:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.rete.recipes:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime.rete:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.query.runtime:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.transformation.evm:1.7.0.201708220933:default:true"/>
-<setEntry value="org.eclipse.viatra.transformation.runtime.emf:1.7.0.201708220933:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.base.itc:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.base:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.localsearch:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.matchers:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.rete.recipes:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime.rete:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.query.runtime:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.transformation.evm:1.7.0.qualifier:default:true"/>
+<setEntry value="org.eclipse.viatra.transformation.runtime.emf:1.7.0.qualifier:default:true"/>
 </setAttribute>
 <booleanAttribute key="append.args" value="true"/>
 <booleanAttribute key="automaticAdd" value="false"/>

@@ -12,6 +12,7 @@ import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.IQueryReference;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PQuery;
+import org.eclipse.viatra.query.runtime.matchers.psystem.rewriters.DefaultFlattenCallPredicate;
 
 import com.incquerylabs.magicdraw.benchmark.incrementalqueries.IncrementalQueries;
 import com.incquerylabs.magicdraw.benchmark.incrementalqueries.util.ParentStateQuerySpecification;
@@ -76,7 +77,11 @@ public enum BackendSelection {
 		switch (this) {
 		case LOCALSEARCH:
 		case HYBRID:
-			return LocalSearchHints.getDefault().setUseBase(true).build();
+			return LocalSearchHints.getDefaultGeneric()
+					.setUseBase(true)
+					.setFlattenCallPredicate(new DefaultFlattenCallPredicate())
+					.setCostFunction(new IndexerBasedConstraintCostFunction())
+					.build();
 		case LOCAL_SEARCH_HINTS_TC_FIRST:
 			return createMinimalCostCallHint(IncomingTransitionsQuerySpecification.instance());
 		case LOCAL_SEARCH_HINTS_CONDITION_FIRST:
@@ -87,7 +92,7 @@ public enum BackendSelection {
 	}
 	
 	private QueryEvaluationHint createMinimalCostCallHint(IQuerySpecification<?> query) {
-		return LocalSearchHints.getDefault().setCostFunction(new IndexerBasedConstraintCostFunction() {
+		return LocalSearchHints.getDefaultGeneric().setCostFunction(new IndexerBasedConstraintCostFunction() {
 			@Override
 			public double calculateCost(PConstraint constraint, IConstraintEvaluationContext input) {
 				try {
@@ -100,7 +105,7 @@ public enum BackendSelection {
 				return super.calculateCost(constraint, input);
 				} catch (Exception e) { e.printStackTrace(); return 0;}
 			}
-		}).build();
+		}).setUseBase(true).setFlattenCallPredicate(new DefaultFlattenCallPredicate()).build();
 	}
 	
 	public boolean canHandleParameters(BenchmarkParameters parameters) throws ViatraQueryException {

@@ -14,8 +14,8 @@ import org.apache.log4j.PatternLayout;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.incquerylabs.vhci.collections.helper.BaseIndexCollectionsHelper;
 import com.nomagic.magicdraw.commandline.CommandLineAction;
-import com.nomagic.magicdraw.core.Application;
 
 public class PerformanceBenchmarkRunner implements CommandLineAction{
 
@@ -34,6 +34,8 @@ public class PerformanceBenchmarkRunner implements CommandLineAction{
 			// Opening project for the first time
 			System.out.println("Warming up...");
 			// Executing the exact same phases with a trivial sized model (to avoid class loading as much as possible)
+			
+			BaseIndexCollectionsHelper.clearAll();
 			MondoSamRunner warmupRound = new MondoSamRunner(parameters);
 			warmupRound.runPerformanceMeasurement(true);
 			
@@ -41,6 +43,7 @@ public class PerformanceBenchmarkRunner implements CommandLineAction{
 			
 			initLogger(parameters);
 			
+			BaseIndexCollectionsHelper.clearAll();
 			MondoSamRunner measurement = new MondoSamRunner(parameters);
 			measurement.runPerformanceMeasurement(false);
 		} catch (InvalidBenchmarkParameterizationException e) {
@@ -56,9 +59,7 @@ public class PerformanceBenchmarkRunner implements CommandLineAction{
 	
 	private BenchmarkParameters parseParameters(String[] args) {
 		BenchmarkParameters parameters = new BenchmarkParameters();
-		
-		
-		
+
 		// XXX Sometimes parameters are stored in a single args value separated by whitespace characters
 		List<String[]> transformedArgs = Lists.transform(Arrays.asList(args), new Function<String, String[]>() {
 

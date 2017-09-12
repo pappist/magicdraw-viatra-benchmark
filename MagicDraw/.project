@@ -35,7 +35,11 @@
 	<variableList>
 		<variable>
 			<name>MD_HOME</name>
-			<value>file:/E:/magicdraw/install</value>
+			<value>file:/E:/magicdraw/installation</value>
+		</variable>
+		<variable>
+			<name>WORKSPACE</name>
+			<value>file:/E:/Projects/INCQUERY-SERVER/magicdraw-benchmark/git/magicdraw-viatra-benchmark</value>
 		</variable>
 	</variableList>
 </projectDescription>

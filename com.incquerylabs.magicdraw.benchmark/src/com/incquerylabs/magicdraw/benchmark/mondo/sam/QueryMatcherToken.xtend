@@ -1,5 +1,7 @@
 package com.incquerylabs.magicdraw.benchmark.mondo.sam
 
+import com.incquerylabs.vhci.modelaccess.surrogate.VHCISurrogateObjectService
+import com.nomagic.magicdraw.core.Application
 import eu.mondo.sam.core.DataToken
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
@@ -8,11 +10,10 @@ import org.eclipse.viatra.query.runtime.api.IPatternMatch
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions
 import org.eclipse.viatra.query.runtime.api.ViatraQueryMatcher
 import org.eclipse.viatra.query.runtime.base.api.BaseIndexOptions
+import org.eclipse.viatra.query.runtime.base.api.IndexingLevel
 import org.eclipse.viatra.query.runtime.base.api.filters.IBaseIndexFeatureFilter
 import org.eclipse.viatra.query.runtime.emf.EMFScope
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint
-import com.nomagic.magicdraw.core.Application
-import org.eclipse.viatra.query.runtime.base.api.IndexingLevel
 
 /**
  * Contains an AdvancedViatraQueryEngine and a ViatraQueryMatcher.
@@ -37,7 +38,10 @@ class QueryMatcherToken implements DataToken {
 						}
 						return false;
 					}
-				}).withStrictNotificationMode(false).withWildcardLevel(IndexingLevel.FULL);
+				}).withStrictNotificationMode(false)
+					.withWildcardLevel(IndexingLevel.FULL)
+					.withDynamicEMFMode(true)
+					.withSurrogateServiceFactory(VHCISurrogateObjectService.FACTORY);
 				
 		if (engineDefaultHint !== null) {
 			val engineOptions = ViatraQueryEngineOptions.defineOptions().withDefaultHint(engineDefaultHint).build();
@@ -68,7 +72,8 @@ class QueryMatcherToken implements DataToken {
 	
 	override destroy() {
 		if (engine !== null) {
-			engine.dispose
+			// we do not need to dispose the engine
+			//engine.dispose 
 		}
 	}	
 	
